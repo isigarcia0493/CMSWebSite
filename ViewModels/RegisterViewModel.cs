@@ -1,0 +1,23 @@
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace CMSWebsite.ViewModels
+{
+    public class RegisterViewModel
+    {
+        [Required(ErrorMessage = "Please enter email")]
+        [DataType(DataType.EmailAddress)]
+        [DisplayName("Email")]
+        public string UserEmail { get; set; }
+
+        [Required(ErrorMessage = "Please enter password")]
+        [DataType(DataType.Password)]
+        [DisplayName("Password")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Please confirm your password")]
+        [DisplayName("Confirm Password")]
+        [Compare("Password", ErrorMessage = "The confirmation password does not match the password")]
+        public string PasswordConfirmation { get; set; }
+    }
+}
