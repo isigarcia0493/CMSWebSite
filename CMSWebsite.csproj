@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20230304021121_ExtendIdentityUser.cs" />
+    <Compile Remove="Migrations\20230304021121_ExtendIdentityUser.Designer.cs" />
+    <Compile Remove="Migrations\20230304023105_Fixthelength.cs" />
+    <Compile Remove="Migrations\20230304023105_Fixthelength.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.28" />

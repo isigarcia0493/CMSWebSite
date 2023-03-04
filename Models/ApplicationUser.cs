@@ -1,27 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Sockets;
 
-namespace CMSWebsite.ViewModels
+namespace CMSWebsite.Models
 {
-    public class RegisterViewModel
+    public class ApplicationUser : IdentityUser
     {
-        [Required(ErrorMessage = "Please enter email")]
-        [DataType(DataType.EmailAddress)]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
-        [DisplayName("Email")]
-        public string UserEmail { get; set; }
-
-        [Required(ErrorMessage = "Please enter password")]
-        [DataType(DataType.Password)]
-        [DisplayName("Password")]
-        public string Password { get; set; }
-
-        [Required(ErrorMessage = "Please confirm your password")]
-        [DisplayName("Confirm Password")]
-        [Compare("Password", ErrorMessage = "The confirmation password does not match the password")]
-        public string PasswordConfirmation { get; set; }
-
         [Required(ErrorMessage = "Please enter your first name")]
         [StringLength(50)]
         [DisplayName("First Name")]
@@ -39,11 +25,6 @@ namespace CMSWebsite.ViewModels
         [Required(ErrorMessage = "Please enter your date of birth")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-
-        [Required(ErrorMessage = "Please enter your phone number")]
-        [StringLength(14)]
-        [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter your Address")]
         [StringLength(100)]
