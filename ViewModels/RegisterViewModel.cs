@@ -7,6 +7,7 @@ namespace CMSWebsite.ViewModels
     {
         [Required(ErrorMessage = "Please enter email")]
         [DataType(DataType.EmailAddress)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
         [DisplayName("Email")]
         public string UserEmail { get; set; }
 

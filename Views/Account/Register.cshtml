@@ -8,7 +8,7 @@
     <div class="form-row">
             @using (Html.BeginForm("Register", "Account", FormMethod.Post))
             {
-                @Html.ValidationSummary()
+                @Html.ValidationSummary("", new { @class="text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.UserEmail, new { @class="required" })
                     @Html.TextBoxFor(model => model.UserEmail, new { @class="form-control" })
