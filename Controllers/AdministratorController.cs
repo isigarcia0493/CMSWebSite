@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CMSWebsite.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdministratorController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -200,6 +200,157 @@ namespace CMSWebsite.Controllers
             }
 
             return RedirectToAction("EditRole", new { id = roleId });
+        }
+
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = _userManager.Users.ToList();
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var userModel = new EditUserViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email
+            };
+
+            return View(userModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+
+                if (user.UserName != user.Email)
+                {
+                    ViewBag.ErrorMessage = "Please make sure both are the same.";
+
+                    return View(model);
+                }
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+
+                return View(user);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(IdentityUser model)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+                var result = await _userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUsers");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+
+                return View(role);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(IdentityRole model)
+        {
+            var role = await _roleManager.FindByIdAsync(model.Id);
+
+            if (role == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            else
+            {
+                var result = await _roleManager.DeleteAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("GetRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("GetRoles");
+            }
         }
     }
 }
