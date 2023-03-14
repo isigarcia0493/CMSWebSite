@@ -70,7 +70,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login (LoginViewModel model)
+        public async Task<IActionResult> Login (LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid) 
             {
@@ -79,12 +79,19 @@ namespace CMSWebsite.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
-                { 
+                {
                     ModelState.AddModelError(string.Empty, "Log in failed! Please try again.");
-                }              
+                }
             }
 
             return View(model);
