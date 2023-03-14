@@ -13,7 +13,7 @@ namespace CMSWebsite.ViewModels
 
         public string RoleId { get; set; }
 
-        [Required(ErrorMessage = "Please entr a role Name")]
+        [Required(ErrorMessage = "Please enter a role name")]
         [DisplayName("Role Name")]
         public string RoleName { get; set; }
 

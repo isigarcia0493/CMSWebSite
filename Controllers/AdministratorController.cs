@@ -64,10 +64,8 @@ namespace CMSWebsite.Controllers
             var role = await _roleManager.FindByIdAsync(id);
 
             if(role == null)
-            {
-                ViewBag.ErrorMessage = $"Role has not been Found";
-
-                return View("Error");
+            {           
+                return RedirectToAction("Error", "Home");
             }
             
             var model = new EditRoleViewModel
