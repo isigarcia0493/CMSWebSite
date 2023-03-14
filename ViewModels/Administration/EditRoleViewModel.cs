@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace CMSWebsite.ViewModels
+namespace CMSWebsite.ViewModels.Administration
 {
     public class EditRoleViewModel
     {
-        public EditRoleViewModel() 
+        public EditRoleViewModel()
         {
             Users = new List<string>();
         }

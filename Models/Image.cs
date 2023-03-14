@@ -1,37 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMSWebsite.Models
 {
-    public class Album
+    public class Image
     {
         [Key]
-        public int AlbumId { get; set; }
+        public int ImageId { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        [DisplayName("Name")]
+        [DisplayName("Image Name")]
         [MaxLength(50)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Short description is required")]
-        [DisplayName("Short Decription")]
+        [DisplayName("Short Description")]
         [MaxLength(50)]
         public string ShortDescription { get; set; }
 
         [Required(ErrorMessage = "Long description is required")]
-        [DisplayName("Name")]
+        [DisplayName("Long Description")]
         [MaxLength(500)]
         public string LongDescription { get; set; }
 
-        public IEnumerable<Image> Image { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime UploadDate { get; set; }
 
-        //Relationship
-        public int CategoryId { get; set; }
-        
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+
+        // Relationship
+        public int AlbumId { get; set; }
+
+        [ForeignKey("AlbumId")]
+        public Album Album { get; set; }
     }
 }

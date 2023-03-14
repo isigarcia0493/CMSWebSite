@@ -47,7 +47,13 @@
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Privacy", "Privacy", "Home", "", new { @class="nav-link text-dark" })
-                        </li>                        
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link text-dark" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Users", "AllUsers", "Administrator", "", new { @class="nav-link text-dark" })
+                        </li>
                     </ul>
                 </div>
             </div>
