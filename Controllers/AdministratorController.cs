@@ -1,5 +1,6 @@
 ﻿using CMSWebsite.Models;
 using CMSWebsite.ViewModels.Administration;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CMSWebsite.Controllers
 {
+    [Authorize]
     public class AdministratorController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -26,6 +28,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddRole(RoleViewModel model)
         {
             if (ModelState.IsValid)
@@ -50,7 +53,7 @@ namespace CMSWebsite.Controllers
 
             return View(model);
         }
-
+      
         public IActionResult GetRoles()
         {
             var roles = _roleManager.Roles.ToList();
@@ -86,6 +89,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             var role = await _roleManager.FindByIdAsync(model.RoleId);
@@ -116,7 +120,7 @@ namespace CMSWebsite.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet]      
         public async Task<IActionResult> AddUserToRole(string roleId)
         {
             ViewBag.RoleId = roleId;
@@ -154,7 +158,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]        
         public async Task<IActionResult> AddUserToRole(List<UserRoleViewModel> model, string roleId)
         {
             var role = await _roleManager.FindByIdAsync(roleId);
