@@ -7,6 +7,12 @@ namespace CMSWebsite.Models
 {
     public class Category
     {
+
+        public Category() 
+        {
+            List<Category> categories = new List<Category>();
+        }
+
         [Key]
         public int CategoryId { get; set; }
 
@@ -25,6 +31,6 @@ namespace CMSWebsite.Models
         [MaxLength(500)]
         public string LongDescription { get; set; }
 
-        public IEnumerable<Album> Album { get; set; }
+        public ICollection<Album> Albums { get; set; }
     }
 }

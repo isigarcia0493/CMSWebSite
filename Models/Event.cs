@@ -77,6 +77,6 @@ namespace CMSWebsite.Models
         [DisplayName("Contact Phone Number")]
         public string PhoneNumber { get; set; }
 
-        public IEnumerable<EventRegistration> EventRegistration { get; set; }
+        public ICollection<EventRegistration> EventRegistrations { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace CMSWebsite.Models
         [DisplayName("First Name")]
         public int ZipCode { get; set; }
 
-        public IEnumerable<Registration> Registration { get; set; }
-        public IEnumerable<FormMessage> FormMessages { get; set; }
+        public ICollection<Registration> Registrations { get; set; }
+        public ICollection<FormMessage> FormMessages { get; set; }
     }
 }

@@ -6,13 +6,9 @@
 
 <h1>List of Users</h1>
 
-<div>
-    @Html.ActionLink("Add User", "Register", "Account", "", new { @class="btn btn-success" } )
-</div>
-
 @if (Model.Any())
 {
-    <div class="table table-striped">
+    <div class="table table-responsive-lg table-striped">
         <table>
             <tr>
                 <th>Users</th>

@@ -26,7 +26,7 @@ namespace CMSWebsite.Models
         [MaxLength(500)]
         public string LongDescription { get; set; }
 
-        public IEnumerable<Image> Image { get; set; }
+        public ICollection<Image> Images { get; set; }
 
         //Relationship
         public int CategoryId { get; set; }

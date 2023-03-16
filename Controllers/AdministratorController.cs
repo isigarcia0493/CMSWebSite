@@ -210,64 +210,6 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditUser(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-
-            if (user == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
-
-            var userModel = new EditUserViewModel
-            {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email
-            };
-
-            return View(userModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditUser(EditUserViewModel model)
-        {
-            var user = await _userManager.FindByIdAsync(model.Id);
-
-            if (user == null)
-            {
-                return RedirectToAction("Error", "Home");
-            }
-            else
-            {
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-
-                if (user.UserName != user.Email)
-                {
-                    ViewBag.ErrorMessage = "Please make sure both are the same.";
-
-                    return View(model);
-                }
-
-                var result = await _userManager.UpdateAsync(user);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("ListUsers");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-
-                return View(model);
-            }
-        }
-
-        [HttpGet]
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);

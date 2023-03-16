@@ -8,9 +8,11 @@ namespace CMSWebsite.Models
     {
         [Key]
         public int Id { get; set; }
+
         public int RegistrationId { get; set; }
         [ForeignKey("RegistrationId")]
         public Registration Registration { get; set; }
+
         public int EventId { get; set; }
         [ForeignKey("EventId")]
         public Event Event { get; set; }

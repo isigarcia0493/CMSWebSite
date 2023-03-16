@@ -1,5 +1,9 @@
 using CMSWebsite.Data;
 using CMSWebsite.Models;
+using CMSWebsite.Repositories;
+using CMSWebsite.RepositoriesInterfaces;
+using CMSWebsite.ServiceInterfaces;
+using CMSWebsite.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +46,12 @@ namespace CMSWebsite
             }).AddXmlSerializerFormatters();
 
             services.AddControllersWithViews();
+
+            //Repositories
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            //Services
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

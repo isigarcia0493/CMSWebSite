@@ -25,7 +25,7 @@ namespace CMSWebsite.Models
         [DisplayName("Please Describe the Accomodations")]
         public string DescribeAccomodations { get; set; }
 
-        public IEnumerable<EventRegistration> EventRegistration { get; set; }
+        public ICollection<EventRegistration> EventRegistrations { get; set; }
 
 
         //Relationships

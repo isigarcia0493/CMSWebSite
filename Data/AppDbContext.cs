@@ -26,16 +26,19 @@ namespace CMSWebsite.Data
 
             builder.Entity<EventRegistration>()
                 .HasOne(r => r.Registration)
-                .WithMany(er => er.EventRegistration)
+                .WithMany(er => er.EventRegistrations)
                 .HasForeignKey(ri => ri.RegistrationId);
 
             builder.Entity<EventRegistration>()
                 .HasOne(e => e.Event)
-                .WithMany(er => er.EventRegistration)
+                .WithMany(er => er.EventRegistrations)
                 .HasForeignKey(e => e.EventId);
 
-            builder.Entity<Image>().HasOne(a => a.Album).WithMany(i => i.Image);
-            builder.Entity<Album>().HasOne(c => c.Category).WithMany(a => a.Album);
+
+            builder.Entity<Image>().HasOne(a => a.Album).WithMany(i => i.Images).IsRequired();
+            builder.Entity<Album>().HasOne(c => c.Category).WithMany(a => a.Albums).IsRequired();
+            builder.Entity<Registration>().HasOne(au => au.User).WithMany(r => r.Registrations).IsRequired();
+            builder.Entity<FormMessage>().HasOne(au => au.User).WithMany(fm => fm.FormMessages).IsRequired();
         }
     }
 }
