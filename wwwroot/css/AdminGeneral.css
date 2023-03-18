@@ -85,3 +85,7 @@ dl dt{
     margin-bottom: 2%;
 }
 
+.thead-dark {
+    font-size: 1.5rem !important;
+}
+
