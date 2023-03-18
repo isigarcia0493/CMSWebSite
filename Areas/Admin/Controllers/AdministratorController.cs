@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CMSWebsite.Controllers
+namespace CMSWebsite.Areas.Admin.Controllers
 {
+    [Area("admin")]
+    [Route("admin/[controller]/[action]")]
     [Authorize(Roles = "Admin")]
     public class AdministratorController : Controller
     {
@@ -22,8 +25,8 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddRole() 
-        { 
+        public IActionResult AddRole()
+        {
             return View();
         }
 
@@ -40,12 +43,12 @@ namespace CMSWebsite.Controllers
 
                 IdentityResult result = await _roleManager.CreateAsync(identityRole);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("GetRoles");
                 }
 
-                foreach(IdentityError error in result.Errors)
+                foreach (IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
@@ -53,7 +56,7 @@ namespace CMSWebsite.Controllers
 
             return View(model);
         }
-      
+
         public IActionResult GetRoles()
         {
             var roles = _roleManager.Roles.ToList();
@@ -66,20 +69,20 @@ namespace CMSWebsite.Controllers
         {
             var role = await _roleManager.FindByIdAsync(id);
 
-            if(role == null)
-            {           
+            if (role == null)
+            {
                 return RedirectToAction("Error", "Home");
             }
-            
+
             var model = new EditRoleViewModel
             {
                 RoleId = id,
                 RoleName = role.Name
             };
 
-            foreach(var user in _userManager.Users)
+            foreach (var user in _userManager.Users)
             {
-                if(await _userManager.IsInRoleAsync(user, role.Name))
+                if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
@@ -111,7 +114,7 @@ namespace CMSWebsite.Controllers
                 }
                 else
                 {
-                    foreach(var error in result.Errors)
+                    foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("", error.Description);
                     }
@@ -120,7 +123,7 @@ namespace CMSWebsite.Controllers
             }
         }
 
-        [HttpGet]      
+        [HttpGet]
         public async Task<IActionResult> AddUserToRole(string roleId)
         {
             ViewBag.RoleId = roleId;
@@ -158,7 +161,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUserToRole(List<UserRoleViewModel> model, string roleId)
         {
             var role = await _roleManager.FindByIdAsync(roleId);

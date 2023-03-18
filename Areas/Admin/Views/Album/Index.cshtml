@@ -10,10 +10,10 @@
             <h1>Albums</h1>
         </div>
     </div>
-    <table class="table table-bordered table-striped tables">
-        <tr>
+    <table class="table table-bordered tables">
+        <tr class="thead-dark">
             <th style="width: 40%;">Name</th>
-            <th style="width: 40%;">Short Description</th>
+            <th style="width: 40%;">Category</th>
             <th style="width: 20%; text-align: center;">
                 @Html.ActionLink("Add Album", "AddAlbum", "Album", "", new { @class="btn btn-success" })
             </th>
@@ -22,10 +22,10 @@
         {
             <tr>
                 <td>@album.Name</td>
-                <td>@album.ShortDescription</td>
+                <td>@album.Category.CategoryName</td>
                 <td style="text-align: center;">
-                    @Html.ActionLink("Details", "AlbumDetails", "Album", new{ id = album.CategoryId }, new { @class="btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "DeleteAlbum", "Album", new{ id = album.CategoryId }, new { @class="btn btn-danger" })
+                    @Html.ActionLink("Details", "AlbumDetails", "Album", new{ id = album.AlbumId }, new { @class="btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "DeleteAlbum", "Album", new{ id = album.AlbumId }, new { @class="btn btn-danger" })
                 </td>
             </tr>
         }

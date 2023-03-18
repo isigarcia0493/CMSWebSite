@@ -77,6 +77,10 @@ namespace CMSWebsite
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "AdminArea",
+                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
     }

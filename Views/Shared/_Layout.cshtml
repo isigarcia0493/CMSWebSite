@@ -54,16 +54,7 @@
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                @Html.ActionLink("Categories", "Index", "Category", "", new { @class="nav-link text-dark" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link text-dark" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link text-dark" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Users", "ListUsers", "Administrator", "", new { @class="nav-link text-dark" })
+                                @Html.ActionLink("Manage", "Index", "Dashboard", new { area = "admin" }, new { @class="nav-link text-dark" })
                             </li>
                         }
                     </ul>

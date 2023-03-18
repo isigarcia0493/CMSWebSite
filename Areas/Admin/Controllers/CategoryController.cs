@@ -1,14 +1,15 @@
 ﻿using CMSWebsite.Models;
-using CMSWebsite.RepositoriesInterfaces;
 using CMSWebsite.ServiceInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace CMSWebsite.Controllers
+namespace CMSWebsite.Areas.Admin.Controllers
 {
+    [Area("admin")]
+    [Route("admin/[controller]/[action]")]
     [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
@@ -34,12 +35,12 @@ namespace CMSWebsite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddCategory(Category model) 
+        public IActionResult AddCategory(Category model)
         {
             if (ModelState.IsValid)
             {
                 _categoryService.AddCategory(model);
-                
+
                 return RedirectToAction("Index");
             }
             else
@@ -49,11 +50,11 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpGet]
-        public IActionResult CategoryDetails(int id) 
+        public IActionResult CategoryDetails(int id)
         {
             var category = _categoryService.GetCategoryById(id);
 
-            if(category == null)
+            if (category == null)
             {
                 return RedirectToAction("NotFound404", "Home");
             }
@@ -62,14 +63,14 @@ namespace CMSWebsite.Controllers
                 category.Albums = _categoryService.GetAlbumsByCategoryId(category.CategoryId).ToList();
                 return View(category);
             }
-        }        
-        
+        }
+
         [HttpGet]
-        public IActionResult EditCategory(int id) 
+        public IActionResult EditCategory(int id)
         {
             var category = _categoryService.GetCategoryById(id);
 
-            if(category == null)
+            if (category == null)
             {
                 return RedirectToAction("NotFound404", "Home");
             }
