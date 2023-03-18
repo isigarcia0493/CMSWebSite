@@ -1,17 +1,21 @@
 ﻿using CMSWebsite.Models;
 using CMSWebsite.RepositoriesInterfaces;
+using CMSWebsite.RepositoryInterfaces;
 using CMSWebsite.ServiceInterfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CMSWebsite.Services
 {
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IAlbumRepository _albumRepository;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IAlbumRepository albumRepository)
         {
             _categoryRepository = categoryRepository;
+            _albumRepository = albumRepository;
         }
 
         public void AddCategory(Category model)
@@ -27,6 +31,11 @@ namespace CMSWebsite.Services
         public void EditCategory(Category model)
         {
             _categoryRepository.Edit(model);
+        }
+
+        public IEnumerable<Album> GetAlbumsByCategoryId(int id)
+        {
+            return _albumRepository.GetAll().Where(a => a.CategoryId == id);
         }
 
         public IEnumerable<Category> GetAllCategories()

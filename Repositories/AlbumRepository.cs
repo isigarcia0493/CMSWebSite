@@ -1,6 +1,6 @@
 ﻿using CMSWebsite.Data;
 using CMSWebsite.Models;
-using CMSWebsite.RepositoriesInterfaces;
+using CMSWebsite.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,18 +8,18 @@ using System.Linq;
 
 namespace CMSWebsite.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class AlbumRepository : IAlbumRepository
     {
-        private AppDbContext _appDbContext;
+        private readonly AppDbContext _appDbContext;
 
-        public CategoryRepository(AppDbContext appDbContext)
+        public AlbumRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
 
-        public void Create(Category model)
+        public void Create(Album model)
         {
-            _appDbContext.Categories.Add(model);
+            _appDbContext.Albums.Add(model);
             _appDbContext.SaveChanges();
         }
 
@@ -27,18 +27,17 @@ namespace CMSWebsite.Repositories
         {
             try
             {
-                Category category = _appDbContext.Categories.Find(id);
-                _appDbContext.Categories.Remove(category);
+                Album album = _appDbContext.Albums.Find(id);
+                _appDbContext.Albums.Remove(album);
                 _appDbContext.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
-
         }
 
-        public void Edit(Category model)
+        public void Edit(Album model)
         {
             try
             {
@@ -51,28 +50,30 @@ namespace CMSWebsite.Repositories
             }
         }
 
-        public IEnumerable<Category> GetAll()
+        public IEnumerable<Album> GetAll()
         {
             try
             {
-                return _appDbContext.Categories.ToList();
+                return _appDbContext.Albums.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
+
         }
 
-        public Category GetById(int id)
+        public Album GetById(int id)
         {
             try
             {
-                return _appDbContext.Categories.Find(id);
+                return _appDbContext.Albums.Find(id);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
+
         }
     }
 }

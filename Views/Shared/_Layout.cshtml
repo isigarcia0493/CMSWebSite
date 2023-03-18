@@ -14,9 +14,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-2">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CMSWebsite</a>
+                @Html.ActionLink("JeanneBaerPhotographs", "Index", "Home", "", new { @class="navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -57,6 +57,9 @@
                                 @Html.ActionLink("Categories", "Index", "Category", "", new { @class="nav-link text-dark" })
                             </li>
                             <li class="nav-item">
+                                @Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link text-dark" })
+                            </li>
+                            <li class="nav-item">
                                 @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link text-dark" })
                             </li>
                             <li class="nav-item">
@@ -68,7 +71,7 @@
             </div>
         </nav>
     </header>
-    <div class="mainWrapper">
+    <div>
         @RenderBody()
     </div>
 

@@ -37,6 +37,12 @@ namespace CMSWebsite.ServiceInterfaces
         /// </summary>
         /// <param name="id"></param>
         void DeleteCategory(int id);
-        
+
+        /// <summary>
+        /// Returns a list of albums with the matching category id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List of albums</returns>
+        public IEnumerable<Album> GetAlbumsByCategoryId(int id);
     }
 }

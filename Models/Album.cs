@@ -8,6 +8,11 @@ namespace CMSWebsite.Models
 {
     public class Album
     {
+        public Album()
+        {
+            List<Album> albums = new List<Album>();
+        }
+
         [Key]
         public int AlbumId { get; set; }
 

@@ -59,6 +59,7 @@ namespace CMSWebsite.Controllers
             }
             else
             {
+                category.Albums = _categoryService.GetAlbumsByCategoryId(category.CategoryId).ToList();
                 return View(category);
             }
         }        
