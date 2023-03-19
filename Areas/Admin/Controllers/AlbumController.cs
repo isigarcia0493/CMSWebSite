@@ -22,6 +22,8 @@ namespace CMSWebsite.Areas.Admin.Controllers
             _albumService = albumService;
             _categoryService = categoryService;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
 

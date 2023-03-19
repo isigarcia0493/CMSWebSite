@@ -1,21 +1,22 @@
-﻿@model Album
+﻿@using Microsoft.AspNetCore.Mvc.Rendering;
+@model ImageViewModel
 
 @{
-    ViewData["Title"] = "Edit Album";
+    ViewData["Title"] = "Add New Image";
 }
 
 <div class="mainWrapper">
     <div class="header">
-        <h1>Edit Album: @Model.Name</h1>
+        <h1>Edit Photo: @Model.Name</h1>
     </div>
     <div class="form-container">
-        @using (Html.BeginForm("EditAlbum", "Album", FormMethod.Post))
+        @using (Html.BeginForm("EditImage", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class="text-danger" })
             </div>
-            @Html.HiddenFor(model => model.AlbumId)
+            @Html.HiddenFor(model => model.ImageId)
             <div class="inputs">
                 <div class="row mb-4">
                     <div class="form-group col-6">
@@ -38,16 +39,23 @@
                 </div>
                 <div class="row mb-5">
                     <div class="form-group col-6">
-                        @Html.LabelFor(model => model.Category, new { @class="required" })
-                        @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories,"Value", "Text"),"Select Category", new { @class = "form-control custom-select mr-sm-2"})
-                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class="text-danger" })
+                        @Html.LabelFor(model => model.Album, new { @class="required" })
+                        @Html.DropDownListFor(model => model.AlbumId, new SelectList(ViewBag.Albums,"Value", "Text"),"Select Album", new { @class = "form-control custom-select mr-sm-2"})
+                        @Html.ValidationMessageFor(model => model.AlbumId, "", new { @class="text-danger" })
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(model => model.ImageUrl, new { @class="required" })
+                        @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control", type="file"})
+                        @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class="text-danger" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-12">
                         <div class="buttons">
-                            <input type="submit" value="Edit" class="btn btn-primary btn-lg" /> |
-                            @Html.ActionLink("Cancel", "AlbumDetails", "Album", new { id = Model.AlbumId }, new { @class="btn btn-danger btn-lg" })
+                            <input type="submit" value="Add" class="btn btn-primary btn-lg" style="opacity: 1.0;" /> |
+                            @Html.ActionLink("Cancel", "Index", "Image", "", new { @class="btn btn-danger btn-lg", style="opacity: 1.0;" })
                         </div>
                     </div>
                 </div>

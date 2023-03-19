@@ -20,6 +20,7 @@ namespace CMSWebsite.Areas.Admin.Controllers
             _categoryService = categoryService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             List<Category> categories = _categoryService.GetAllCategories().ToList();

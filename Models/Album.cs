@@ -17,7 +17,7 @@ namespace CMSWebsite.Models
         public int AlbumId { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        [DisplayName("Name")]
+        [DisplayName("Album Name")]
         [MaxLength(50)]
         public string Name { get; set; }
 

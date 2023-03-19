@@ -24,6 +24,7 @@
                             @role.Name
                         </td>
                         <td style="text-align: center;">
+                            @Html.ActionLink("Edit", "EditRole", "Administrator", new { id = role.Id }, new { @class="btn btn-primary" })
                             @Html.ActionLink("Delete", "DeleteRole", "Administrator", new { id = role.Id }, new { @class="btn btn-danger" })
                         </td>
                     </tr>

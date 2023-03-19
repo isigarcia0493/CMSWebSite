@@ -1,4 +1,5 @@
 using CMSWebsite.Data;
+using CMSWebsite.Helpers;
 using CMSWebsite.Models;
 using CMSWebsite.Repositories;
 using CMSWebsite.RepositoriesInterfaces;
@@ -46,10 +47,13 @@ namespace CMSWebsite
             //Repositories
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
             //Services
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IAlbumService, AlbumService>();
+            services.AddScoped<IImageService, ImageService>();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
