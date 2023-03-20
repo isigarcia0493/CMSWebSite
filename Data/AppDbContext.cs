@@ -19,6 +19,7 @@ namespace CMSWebsite.Data
         public DbSet<FormMessage> FormMessages { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Registration> Registrations { get; set; }
+        public DbSet<Carousel> Carousel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
