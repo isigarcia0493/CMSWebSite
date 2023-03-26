@@ -32,7 +32,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-
             List<Album> albums = _albumService.GetAllAlbums().ToList();
            
             foreach(var album in albums)

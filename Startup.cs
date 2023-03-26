@@ -48,11 +48,13 @@ namespace CMSWebsite
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IAlbumRepository, AlbumRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
 
             //Services
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IAlbumService, AlbumService>();
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IEventService, EventService>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
         }
 

@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using CMSWebsite.Models;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Intrinsics.X86;
+using System.ComponentModel;
+using System;
+using Microsoft.AspNetCore.Http;
+using CMSWebsite.Models.Enums;
+using CMSWebsite.Helpers;
 
-namespace CMSWebsite.Models
+namespace CMSWebsite.Areas.Admin.ViewModels
 {
-    public class Event
+    public class EventViewModel
     {
         [Key]
         public int EventId { get; set; }
@@ -49,7 +51,7 @@ namespace CMSWebsite.Models
 
         [Required(ErrorMessage = "Enter the event address")]
         [MaxLength(100)]
-        [DisplayName("Address")]       
+        [DisplayName("Address")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Enter the city")]
@@ -81,8 +83,10 @@ namespace CMSWebsite.Models
 
         [Required(ErrorMessage = "Image is required")]
         [DisplayName("Upload Photo")]
-        public string ImageUrl { get; set; }
+        public IFormFile ImageUrl { get; set; }
 
         public ICollection<EventRegistration> EventRegistrations { get; set; }
+
+        public States States { get; set; }
     }
 }

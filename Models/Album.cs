@@ -29,7 +29,7 @@ namespace CMSWebsite.Models
         public string PublicId { get; set; }
 
         [Required(ErrorMessage = "Image is required")]
-        [DisplayName("UploadPhoto")]
+        [DisplayName("Upload Photo")]
         public string AlbumImageUrl { get; set; }
 
         public ICollection<Image> Images { get; set; }

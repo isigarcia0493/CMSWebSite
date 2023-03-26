@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Event>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<div class="mainWrapper">
+    <div>
+        <div class="header">
+            <h1>All Events</h1>
+        </div>
+    </div>
+    <table class="table table-bordered tables">
+        <tr class="thead-dark">
+            <th style="width: 30%;">Event Name</th>
+            <th style="width: 30%;">Start Date</th>
+            <th style="width: 20%; text-align: center;">Image</th>
+            <th style="width: 20%; text-align: center;">
+                @Html.ActionLink("Create Event", "CreateEvent", "Event", "", new { @class="btn btn-success" })
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EventName</td>
+                <td>@item.StartDate.ToString("d")</td>
+                <td style="text-align: center;"><img src="@item.ImageUrl" alt="@item.ShortDescription" width="50" height="50" /></td>
+                <td style="text-align: center;">
+                    @Html.ActionLink("Details", "EventDetails", "Event", new{ id = item.EventId }, new { @class="btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "DeleteEvent", "Event", new{ id = item.EventId }, new { @class="btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
