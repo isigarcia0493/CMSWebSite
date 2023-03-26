@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering;
-@model Album
+@model AlbumViewModel
 
 @{
     ViewData["Title"] = "Add New Album";
@@ -10,7 +10,7 @@
         <h1>Add Album</h1>
     </div>
     <div class="form-container">
-        @using (Html.BeginForm("AddAlbum", "Album", FormMethod.Post))
+        @using (Html.BeginForm("AddAlbum", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
@@ -43,11 +43,18 @@
                         @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class="text-danger" })
                     </div>
                 </div>
+                <div class="row mb-5">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(model => model.AlbumImageUrl, new { @class="required" })
+                        @Html.TextBoxFor(model => model.AlbumImageUrl, new { @class = "form-control", type="file"})
+                        @Html.ValidationMessageFor(model => model.AlbumImageUrl, "", new { @class="text-danger" })
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-12">
                         <div class="buttons">
                             <input type="submit" value="Add" class="btn btn-primary btn-lg" style="opacity: 1.0;" /> |
-                            @Html.ActionLink("Cancel", "Index", "Album", "", new { @class="btn btn-danger btn-lg", style="opacity: 1.0;" })
+                            @Html.ActionLink("Cancel", "Index", "Album", "", new { @class="btn btn-danger btn-lg" })
                         </div>
                     </div>
                 </div>

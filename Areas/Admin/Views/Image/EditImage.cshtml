@@ -54,8 +54,8 @@
                 <div class="row">
                     <div class="form-group col-12">
                         <div class="buttons">
-                            <input type="submit" value="Add" class="btn btn-primary btn-lg" style="opacity: 1.0;" /> |
-                            @Html.ActionLink("Cancel", "Index", "Image", "", new { @class="btn btn-danger btn-lg", style="opacity: 1.0;" })
+                            <input type="submit" value="Edit" class="btn btn-primary btn-lg" style="opacity: 1.0;" /> |
+                            @Html.ActionLink("Cancel", "ImageDetails", "Image", new { id = Model.ImageId }, new { @class="btn btn-danger btn-lg", style="opacity: 1.0;" })
                         </div>
                     </div>
                 </div>

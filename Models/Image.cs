@@ -32,7 +32,14 @@ namespace CMSWebsite.Models
         public string LongDescription { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayName("Upload Date")]
         public DateTime UploadDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Updated Date")]
+        public DateTime UpdatedDate { get; set; }
+
+        public string PublicId { get; set; }
 
         [Required(ErrorMessage = "Image is required")]
         [DisplayName("UploadPhoto")]

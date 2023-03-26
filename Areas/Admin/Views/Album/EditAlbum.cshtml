@@ -1,4 +1,4 @@
-﻿@model Album
+﻿@model AlbumViewModel
 
 @{
     ViewData["Title"] = "Edit Album";
@@ -9,7 +9,7 @@
         <h1>Edit Album: @Model.Name</h1>
     </div>
     <div class="form-container">
-        @using (Html.BeginForm("EditAlbum", "Album", FormMethod.Post))
+        @using (Html.BeginForm("EditAlbum", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
@@ -41,6 +41,13 @@
                         @Html.LabelFor(model => model.Category, new { @class="required" })
                         @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories,"Value", "Text"),"Select Category", new { @class = "form-control custom-select mr-sm-2"})
                         @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class="text-danger" })
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(model => model.AlbumImageUrl, new { @class="required" })
+                        @Html.TextBoxFor(model => model.AlbumImageUrl, new { @class = "form-control", type="file"})
+                        @Html.ValidationMessageFor(model => model.AlbumImageUrl, "", new { @class="text-danger" })
                     </div>
                 </div>
                 <div class="row">

@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using CMSWebsite.Models;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CMSWebsite.Models
+namespace CMSWebsite.Areas.Admin.ViewModels
 {
-    public class Album
+    public class AlbumViewModel
     {
         [Key]
         public int AlbumId { get; set; }
@@ -30,13 +31,13 @@ namespace CMSWebsite.Models
 
         [Required(ErrorMessage = "Image is required")]
         [DisplayName("UploadPhoto")]
-        public string AlbumImageUrl { get; set; }
+        public IFormFile AlbumImageUrl { get; set; }
 
         public ICollection<Image> Images { get; set; }
 
         //Relationship
         public int CategoryId { get; set; }
-        
+
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
     }

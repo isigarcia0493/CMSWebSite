@@ -1,12 +1,13 @@
 ﻿@model Image
 
 @{
-    ViewData["Title"] = "Image Details";
+    ViewData["Title"] = "Delete Image";
 }
+
 
 <div>
     <div class="header">
-        <h1>Details for @Model.Name</h1>
+        <h1>Are you sure you want to delete this image?</h1>
     </div>
     <div class="detailsView">
         <div class="details">
@@ -45,25 +46,21 @@
                     @Html.DisplayNameFor(model => model.UpdatedDate)
                 </dt>
                 <dd class="col-sm-6">
-                    @if (Model.UpdatedDate < Model.UploadDate)
-                    {
-                        <p>Not updated yet</p>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(model => model.UpdatedDate)
-                    }
+                    @Html.DisplayFor(model => model.UpdatedDate)
                 </dd>
             </dl>
-            <div class="offset-4">
-                @Html.ActionLink("Edit", "EditImage", "Image", new { id = Model.ImageId }, new { @class="btn btn-primary" }) |
-                @Html.ActionLink("Back to Photos", "Index", "Image", "", new { @class="btn btn-secondary" })
+            <div class="offset-3">
+                <form asp-action="DeleteImage" asp-controller="Image">
+                    <input type="hidden" asp-for="ImageId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Html.ActionLink("Back to Photos", "Index", "Image", "", new { @class="btn btn-secondary" })
+                </form>
             </div>
         </div>
         <div class="col-6">
             <div class="photo">
-               <img src="@Model.ImageUrl" alt="@Model.ShortDescription" width="500" height="500" />
+                <img src="@Model.ImageUrl" alt="@Model.ShortDescription" width="500" height="500" />
             </div>
         </div>
     </div>
-</div> 
+</div>            

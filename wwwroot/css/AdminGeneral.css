@@ -82,11 +82,19 @@ label {
     margin-right: auto;
     font-size: 1.5rem;
 }
+
 dl dt{
     margin-bottom: 2%;
 }
 
 .thead-dark {
     font-size: 1.5rem !important;
+}
+
+.detailsView{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    overflow: hidden;
+    padding: 2% 0% 0% 3%
 }
 

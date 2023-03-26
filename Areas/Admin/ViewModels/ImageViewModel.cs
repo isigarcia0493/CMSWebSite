@@ -32,8 +32,10 @@ namespace CMSWebsite.Areas.Admin.ViewModels
         public DateTime UploadDate { get; set; }
 
         [Required(ErrorMessage = "Image is required")]
-        [DisplayName("UploadPhoto")]
+        [DisplayName("Upload Photo")]
         public IFormFile ImageUrl { get; set; }
+
+        public string PublicId { get; set; }
 
         public int AlbumId { get; set; }
 
