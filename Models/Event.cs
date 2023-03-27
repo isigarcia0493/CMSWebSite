@@ -30,22 +30,26 @@ namespace CMSWebsite.Models
         [Required(ErrorMessage = "Enter start date")]
         [DisplayName("Start Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "Enter end date")]
         [DisplayName("End Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "Enter start time")]
         [DisplayName("Start Time")]
         [DataType(DataType.Time)]
-        public DateTime StartTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public string StartTime { get; set; }
 
         [Required(ErrorMessage = "Enter end time")]
         [DisplayName("End time")]
         [DataType(DataType.Time)]
-        public DateTime EndTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public string EndTime { get; set; }
 
         [Required(ErrorMessage = "Enter the event address")]
         [MaxLength(100)]
@@ -70,6 +74,7 @@ namespace CMSWebsite.Models
         [Required(ErrorMessage = "Enter email")]
         [MaxLength(50)]
         [DisplayName("Email")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Enter the contact phone number")]

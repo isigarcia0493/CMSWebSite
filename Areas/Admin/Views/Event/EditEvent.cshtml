@@ -2,21 +2,22 @@
 @using CMSWebsite.Models.Enums
 
 @{
-    ViewData["Title"] = "Create Event";
+    ViewData["Title"] = "Edit Event";
 }
 
 <div class="mainWrapper">
     <div class="header">
-        <h1>Create Event</h1>
+        <h1>Edit Event</h1>
     </div>
     <div class="form-container mt-4">
-        @using (Html.BeginForm("CreateEvent", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("EditEvent", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class="text-danger" })
             </div>
             <div class="inputs">
+                @Html.HiddenFor(model => model.EventId)
                 <div class="row mb-4">
                     <div class="form-group col-6">
                         @Html.LabelFor(model => model.EventName, new { @class = "required" })
@@ -102,7 +103,7 @@
                 <div class="row">
                     <div class="form-group col-12">
                         <div class="buttons">
-                            <input type="submit" value="Create" class="btn btn-primary btn-lg" /> |
+                            <input type="submit" value="Edit" class="btn btn-primary btn-lg" /> |
                             @Html.ActionLink("Cancel", "Index", "Event", "", new { @class="btn btn-danger btn-lg" })
                         </div>
                     </div>
