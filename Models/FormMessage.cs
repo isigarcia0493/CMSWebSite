@@ -24,10 +24,14 @@ namespace CMSWebsite.Models
         [DataType(DataType.DateTime)]
         public DateTime DateOfMessage { get; set; }
 
-        [Required(ErrorMessage = "Please type your message")]
-        [MaxLength(500)]
+        [Required(ErrorMessage = "Please type your subject")]
+        [MaxLength(50)]
         [DisplayName("Subject")]
         public string Subject { get; set; }
+
+        [Required(ErrorMessage = "Please type your message")]
+        [DisplayName("Message")]
+        public string Body { get; set; }
 
         //Relationships
         public string UserId { get; set; }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using System;
+using Microsoft.AspNetCore.Http;
 
-namespace CMSWebsite.Models
+namespace CMSWebsite.Areas.Admin.ViewModels
 {
-    public class Carousel
+    public class CarouselViewModel
     {
         [Key]
         public int CarouselId { get; set; }
@@ -24,16 +25,16 @@ namespace CMSWebsite.Models
         [DisplayName("Long Descripiton")]
         public string LongDescription { get; set; }
 
-        [Required(ErrorMessage = "Enter an expiration date")]        
+        [Required(ErrorMessage = "Enter an expiration date")]
         [DisplayName("Expiration Date")]
         [DataType(DataType.Date)]
         public DateTime ExpirationDate { get; set; }
 
         public string PublicId { get; set; }
 
-        [Required(ErrorMessage = "An image is required")]        
+        [Required(ErrorMessage = "An image is required")]
         [DisplayName("Upload Image")]
-        public string ImageUrl { get; set; }
+        public IFormFile ImageUrl { get; set; }
 
         [DisplayName("Image for Display?")]
         public bool DisplayImage { get; set; }

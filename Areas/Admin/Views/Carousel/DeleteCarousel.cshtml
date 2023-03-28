@@ -1,0 +1,67 @@
+﻿@model Carousel
+
+@{
+    ViewData["Title"] = "Delete Carousel";
+}
+
+
+<div>
+    <div class="header">
+        <h1>Are you sure you want to delete this image?</h1>
+    </div>
+    <div class="detailsView">
+        <div class="details">
+            <dl class="row mb-5">
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.ImageName)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.ImageName)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.ShortDescription)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.ShortDescription)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.LongDescription)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.LongDescription)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.ExpirationDate)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.ExpirationDate)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.DisplayImage)
+                </dt>
+                <dd class="col-sm-6">
+                    @if (Model.DisplayImage == true)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </dd>
+            </dl>
+            <div class="offset-3">
+                <form asp-action="DeleteCarousel" asp-controller="Carousel">
+                    <input type="hidden" asp-for="CarouselId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Html.ActionLink("Back to List", "Index", "Carousel", "", new { @class="btn btn-secondary" })
+                </form>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="photo">
+                <img src="@Model.ImageUrl" alt="@Model.ShortDescription" width="500" height="500" />
+            </div>
+        </div>
+    </div>
+</div>

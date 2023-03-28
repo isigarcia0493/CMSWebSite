@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering;
-@model ImageViewModel
+﻿@model CarouselViewModel
 
 @{
     ViewData["Title"] = "Add New Image";
@@ -7,10 +6,10 @@
 
 <div class="mainWrapper">
     <div class="header">
-        <h1>Add New Photo</h1>
+        <h1>Add New Image To Carousel</h1>
     </div>
     <div class="form-container">
-        @using (Html.BeginForm("AddImage", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("AddCarousel", "Carousel", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
@@ -19,9 +18,9 @@
             <div class="inputs">
                 <div class="row mb-4">
                     <div class="form-group col-6">
-                        @Html.LabelFor(model => model.Name, new { @class = "required" })
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger" })
+                        @Html.LabelFor(model => model.ImageName, new { @class = "required" })
+                        @Html.EditorFor(model => model.ImageName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ImageName, "", new { @class="text-danger" })
                     </div>
                     <div class="form-group col-6">
                         @Html.LabelFor(model => model.ShortDescription, new { @class="required" })
@@ -38,9 +37,9 @@
                 </div>
                 <div class="row mb-5">
                     <div class="form-group col-6">
-                        @Html.LabelFor(model => model.Album, new { @class="required" })
-                        @Html.DropDownListFor(model => model.AlbumId, new SelectList(ViewBag.Albums,"Value", "Text"),"Select Album", new { @class = "form-control custom-select mr-sm-2"})
-                        @Html.ValidationMessageFor(model => model.AlbumId, "", new { @class="text-danger" })
+                        @Html.LabelFor(model => model.ExpirationDate, new { @class="required" })
+                        @Html.TextBoxFor(model => model.ExpirationDate, new { @class = "form-control", type="date"})
+                        @Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class="text-danger" })
                     </div>
                 </div>
                 <div class="row mb-5">
@@ -50,11 +49,18 @@
                         @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class="text-danger" })
                     </div>
                 </div>
+                <div class="row mb-5">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(model => model.DisplayImage)
+                        @Html.EditorFor(model => model.DisplayImage, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DisplayImage, "", new { @class="text-danger" })
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-12">
                         <div class="buttons">
                             <input type="submit" value="Add" class="btn btn-primary btn-lg" /> |
-                            @Html.ActionLink("Cancel", "Index", "Image", "", new { @class="btn btn-danger btn-lg" })
+                            @Html.ActionLink("Cancel", "Index", "Carousel", "", new { @class="btn btn-danger btn-lg" })
                         </div>
                     </div>
                 </div>

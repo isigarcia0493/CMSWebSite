@@ -30,13 +30,11 @@ namespace CMSWebsite.Models
         [Required(ErrorMessage = "Enter start date")]
         [DisplayName("Start Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "Enter end date")]
         [DisplayName("End Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "Enter start time")]

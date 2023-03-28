@@ -49,12 +49,16 @@ namespace CMSWebsite
             services.AddScoped<IAlbumRepository, AlbumRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<ICarouselRepository, CarouselRepository>();
+            services.AddScoped<IFormMessageRepository, FormMessageRepository>();
 
             //Services
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IAlbumService, AlbumService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ICarouselService, CarouselService>();
+            services.AddScoped<IFormMessageService, FormMessageService>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
         }
 

@@ -60,10 +60,16 @@
                                     @Html.ActionLink("Events", "Index", "Event", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
                                 </li>
                                 <li class="nav-item">
+                                    @Html.ActionLink("Carousel", "Index", "Carousel", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                </li>
+                                <li class="nav-item">
                                     @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
                                 </li>
                                 <li class="nav-item">
                                     @Html.ActionLink("Users", "ListUsers", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Go to Website", "Index", "Home", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
                                 </li>
                             </ul>
                         </div>
