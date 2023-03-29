@@ -123,3 +123,13 @@ dl dt{
     border-radius: 0px 30px 150px;
     font-size: 1.1em
 }
+
+.Active {
+    background-color: white;
+    --bs-nav-link-color: black !important;
+}
+
+.nav {
+    --bs-link-color: white;
+    --bs-nav-link-color: white;
+}

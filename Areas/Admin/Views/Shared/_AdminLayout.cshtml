@@ -1,4 +1,5 @@
-﻿@inject SignInManager<ApplicationUser> _signInManager;
+﻿@using CMSWebsite.Helpers;
+@inject SignInManager<ApplicationUser> _signInManager;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,35 +33,35 @@
                         </div>                        
                         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                             <ul class="nav mb-sm-auto mb-0 mt-3" id="menu" role="tablist">
-                                <li class="nav-item">
-                                    @Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                <li class="nav-item @Html.IsActive("Dashboard", "Index")">
+                                    @Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Categories", "Index", "Category", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Categories", "Index", "Category", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Photos", "Index", "Image", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Photos", "Index", "Image", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Events", "Index", "Event", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Events", "Index", "Event", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Carousel", "Index", "Carousel", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Carousel", "Index", "Carousel", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Messages", "Index", "FormMessage", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Messages", "Index", "FormMessage", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Users", "ListUsers", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Users", "ListUsers", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">
-                                    @Html.ActionLink("Go to Website", "Index", "Home", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                    @Html.ActionLink("Go to Website", "Index", "Home", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                             </ul>
                         </div>
