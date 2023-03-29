@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FormMessage>
+
+@{
+    ViewData["Title"] = "Messages";
+}
+
+<div class="mainWrapper">
+    <div>
+        <div class="header">
+            <h1>All Messages</h1>
+        </div>
+    </div>
+    <table class="table table-bordered tables">
+        <tr class="thead-dark">
+            <th style="width: 30%;">User Name</th>
+            <th style="width: 30%;">Subject</th>
+            <th style="width: 20%">Date</th>
+            <th></th>
+        </tr>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.FirstName @message.LastName</td>
+                <td>@message.Subject</td>
+                <td>@message.DateOfMessage.ToString("d")</td>
+                <td style="text-align: center;">
+                    @Html.ActionLink("Details", "EventDetails", "Event", new{ id = message.FormMessageId }, new { @class="btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "DeleteEvent", "Event", new{ id = message.FormMessageId }, new { @class="btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

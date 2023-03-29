@@ -43,7 +43,9 @@ namespace CMSWebsite.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult CreateEvent()
         {
-            return View();
+            EventViewModel eventModel = new EventViewModel();
+
+            return View(eventModel);
         }
 
         [HttpPost]

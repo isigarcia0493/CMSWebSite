@@ -6,6 +6,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using CMSWebsite.Models.Enums;
 using CMSWebsite.Helpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CMSWebsite.Areas.Admin.ViewModels
 {
@@ -88,6 +89,22 @@ namespace CMSWebsite.Areas.Admin.ViewModels
 
         public ICollection<EventRegistration> EventRegistrations { get; set; }
 
-        public States States { get; set; }
+        public IEnumerable<SelectListItem> States
+        {
+            get
+            {
+                var options = new List<SelectListItem>();
+
+                foreach (States option in Enum.GetValues(typeof(States)))
+                {
+                    options.Add(new SelectListItem()
+                    {
+                        Text = AttExtension.GetDescription(option),
+                        Value = option.ToString(),
+                    });
+                }
+                return options;
+            }
+        }
     }
 }

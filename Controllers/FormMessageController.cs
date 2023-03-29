@@ -3,6 +3,7 @@ using CMSWebsite.ServiceInterfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,6 +43,8 @@ namespace CMSWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.DateOfMessage = DateTime.Now;
+
                 _formMessageService.AddMessage(model);
 
                 TempData["success"] = "Message Sent Successfully";

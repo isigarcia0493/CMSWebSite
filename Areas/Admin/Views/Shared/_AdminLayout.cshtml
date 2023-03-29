@@ -63,6 +63,9 @@
                                     @Html.ActionLink("Carousel", "Index", "Carousel", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
                                 </li>
                                 <li class="nav-item">
+                                    @Html.ActionLink("Messages", "Index", "FormMessage", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
+                                </li>
+                                <li class="nav-item">
                                     @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block text-white items-menu", role="tab" })
                                 </li>
                                 <li class="nav-item">
@@ -87,6 +90,8 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
+    <script src="~/js/masks.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
