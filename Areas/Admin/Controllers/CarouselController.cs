@@ -46,20 +46,27 @@ namespace CMSWebsite.Areas.Admin.Controllers
             {
                 var result = await _imageService.AddImageAsync(cViewModel.ImageUrl);
 
-                var carousel = new Carousel
+                if(result.Error == null)
                 {
-                    ImageName = cViewModel.ImageName,
-                    ShortDescription = cViewModel.ShortDescription,
-                    LongDescription = cViewModel.LongDescription,
-                    ExpirationDate = cViewModel.ExpirationDate,
-                    PublicId = result.PublicId,
-                    ImageUrl = result.Url.ToString(),
-                    DisplayImage = cViewModel.DisplayImage,
-                };
+                    var carousel = new Carousel
+                    {
+                        ImageName = cViewModel.ImageName,
+                        ShortDescription = cViewModel.ShortDescription,
+                        LongDescription = cViewModel.LongDescription,
+                        ExpirationDate = cViewModel.ExpirationDate,
+                        PublicId = result.PublicId,
+                        ImageUrl = result.Url.ToString(),
+                    };
 
-                _carouselService.AddCarousel(carousel);
+                    _carouselService.AddCarousel(carousel);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = result.Error.Message.ToString();
+                    return View(cViewModel);
+                }                
             }
             else
             {
@@ -103,7 +110,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
                     LongDescription = carousel.LongDescription,
                     ExpirationDate = carousel.ExpirationDate,
                     PublicId = carousel.PublicId,
-                    DisplayImage = carousel.DisplayImage,
                 };
 
                 return View(cViewModel);
@@ -116,21 +122,28 @@ namespace CMSWebsite.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _imageService.AddImageAsync(cViewModel.ImageUrl);
-
                 var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
-                await _imageService.DeleteImageAsync(carousel.PublicId);
 
-                carousel.ImageName = cViewModel.ImageName;
-                carousel.ShortDescription = cViewModel.ShortDescription;
-                carousel.LongDescription = cViewModel.LongDescription;
-                carousel.ExpirationDate = cViewModel.ExpirationDate;
-                carousel.PublicId = result.PublicId.ToString();
-                carousel.ImageUrl = result.Url.ToString();
-                carousel.DisplayImage = cViewModel.DisplayImage;
+                if(result.Error == null)
+                {
+                    await _imageService.DeleteImageAsync(carousel.PublicId);
 
-                _carouselService.EditCarousel(carousel);
+                    carousel.ImageName = cViewModel.ImageName;
+                    carousel.ShortDescription = cViewModel.ShortDescription;
+                    carousel.LongDescription = cViewModel.LongDescription;
+                    carousel.ExpirationDate = cViewModel.ExpirationDate;
+                    carousel.PublicId = result.PublicId.ToString();
+                    carousel.ImageUrl = result.Url.ToString();
 
-                return RedirectToAction("Index");
+                    _carouselService.EditCarousel(carousel);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = result.Error.Message.ToString();
+                    return View(cViewModel);
+                }
             }
             else
             {

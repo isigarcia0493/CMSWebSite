@@ -15,6 +15,7 @@
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class="text-danger" })
+                @TempData["Error"]
             </div>
             <div class="inputs">
                 <div class="row mb-4">

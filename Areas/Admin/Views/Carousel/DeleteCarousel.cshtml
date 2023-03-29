@@ -36,19 +36,6 @@
                 <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.ExpirationDate)
                 </dd>
-                <dt class="col-sm-6">
-                    @Html.DisplayNameFor(model => model.DisplayImage)
-                </dt>
-                <dd class="col-sm-6">
-                    @if (Model.DisplayImage == true)
-                    {
-                        <p>Yes</p>
-                    }
-                    else
-                    {
-                        <p>No</p>
-                    }
-                </dd>
             </dl>
             <div class="offset-3">
                 <form asp-action="DeleteCarousel" asp-controller="Carousel">

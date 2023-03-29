@@ -61,33 +61,48 @@ namespace CMSWebsite.Areas.Admin.Controllers
 
                 var result = await _imageService.AddImageAsync(iViewModel.ImageUrl);
 
-                var image = new Image
+                if (result.Error == null)
                 {
-                    Name = iViewModel.Name,
-                    ShortDescription = iViewModel.ShortDescription,
-                    LongDescription = iViewModel.LongDescription,
-                    UploadDate = iViewModel.UploadDate,
-                    ImageUrl = result.Url.ToString(),
-                    PublicId = result.PublicId.ToString(),
-                    AlbumId = iViewModel.AlbumId
-                };
+                    var image = new Image
+                    {
+                        Name = iViewModel.Name,
+                        ShortDescription = iViewModel.ShortDescription,
+                        LongDescription = iViewModel.LongDescription,
+                        UploadDate = iViewModel.UploadDate,
+                        ImageUrl = result.Url.ToString(),
+                        PublicId = result.PublicId.ToString(),
+                        AlbumId = iViewModel.AlbumId
+                    };
 
-                _imageService.AddImage(image);
+                    _imageService.AddImage(image);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Albums = GetAlbums();
+                    TempData["Error"] = result.Error.Message.ToString();
+                    return View(iViewModel);
+                }               
 
-                return RedirectToAction("Index");
             }
             else
             {
                 ModelState.AddModelError("", "Upload Failed");
             }
-            
-            ViewBag.Albums = _albumService.GetAllAlbums().Select(c => new SelectListItem()
+
+            ViewBag.Albums = GetAlbums();
+
+            return View(iViewModel);
+        }
+
+        public IEnumerable<SelectListItem> GetAlbums()
+        {
+            return _albumService.GetAllAlbums().Select(c => new SelectListItem()
             {
                 Text = c.Name,
                 Value = c.AlbumId.ToString()
             }).ToList();
 
-            return View(iViewModel);
         }
 
         [HttpGet]
@@ -130,11 +145,7 @@ namespace CMSWebsite.Areas.Admin.Controllers
                     UploadDate = image.UploadDate
                 };
 
-                ViewBag.albums = _albumService.GetAllAlbums().Select(c => new SelectListItem()
-                {
-                    Text = c.Name,
-                    Value = c.AlbumId.ToString()
-                }).ToList();
+                ViewBag.albums = GetAlbums();
 
                 return View(iViewModel);
             }
@@ -148,30 +159,34 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 var result = await _imageService.AddImageAsync(iViewModel.ImageUrl);
 
                 var image = _imageService.GetImageById(iViewModel.ImageId);
-                await _imageService.DeleteImageAsync(image.PublicId);
+                
+                if(result == null)
+                {
+                    await _imageService.DeleteImageAsync(image.PublicId);
+                    image.ImageId = iViewModel.ImageId;
+                    image.Name = iViewModel.Name;
+                    image.ShortDescription = iViewModel.ShortDescription;
+                    image.LongDescription = iViewModel.LongDescription;
+                    image.UploadDate = image.UploadDate;
+                    image.UpdatedDate = DateTime.Now;
+                    image.ImageUrl = result.Url.ToString();
+                    image.PublicId = result.PublicId.ToString();
+                    image.AlbumId = iViewModel.AlbumId;
 
-                image.ImageId = iViewModel.ImageId;
-                image.Name = iViewModel.Name;
-                image.ShortDescription = iViewModel.ShortDescription;
-                image.LongDescription = iViewModel.LongDescription;
-                image.UploadDate = image.UploadDate;
-                image.UpdatedDate = DateTime.Now;
-                image.ImageUrl = result.Url.ToString();
-                image.PublicId = result.PublicId.ToString();
-                image.AlbumId = iViewModel.AlbumId;
+                    _imageService.EditImage(image);
 
-                _imageService.EditImage(image);
-
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Albums = GetAlbums();
+                    TempData["Error"] = result.Error.Message.ToString();
+                    return View(iViewModel);
+                }
             }
             else
             {
-                ViewBag.Albums = _albumService.GetAllAlbums().Select(c => new SelectListItem()
-                {
-                    Text = c.Name,
-                    Value = c.AlbumId.ToString()
-                }).ToList();
-
+                ViewBag.Albums = GetAlbums();
                 return View(iViewModel);
             }                                   
         }

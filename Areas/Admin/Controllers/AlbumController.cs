@@ -45,11 +45,7 @@ namespace CMSWebsite.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddAlbum()
         {
-            ViewBag.Categories = _categoryService.GetAllCategories().Select(c => new SelectListItem()
-            {
-                Text = c.CategoryName,
-                Value = c.CategoryId.ToString()
-            }).ToList();
+            ViewBag.Categories = GetCategories();
 
             return View();
         }
@@ -62,27 +58,34 @@ namespace CMSWebsite.Areas.Admin.Controllers
             {
                 var result = await _imageService.AddImageAsync(albumVM.AlbumImageUrl);
 
-                var album = new Album()
+                if(result.Error == null)
                 {
-                    Name = albumVM.Name,
-                    ShortDescription = albumVM.ShortDescription,
-                    LongDescription = albumVM.LongDescription,
-                    PublicId = result.PublicId.ToString(),
-                    AlbumImageUrl = result.Url.ToString(),
-                    CategoryId = albumVM.CategoryId,
-                };
+                    var album = new Album()
+                    {
+                        Name = albumVM.Name,
+                        ShortDescription = albumVM.ShortDescription,
+                        LongDescription = albumVM.LongDescription,
+                        PublicId = result.PublicId.ToString(),
+                        AlbumImageUrl = result.Url.ToString(),
+                        CategoryId = albumVM.CategoryId,
+                    };
 
-                _albumService.AddAlbum(album);
+                    _albumService.AddAlbum(album);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Categories = GetCategories();
+                    TempData["Error"] = result.Error.Message.ToString();
+
+                    return View(albumVM);
+                }
+                
             }
             else
             {
-                ViewBag.Categories = _categoryService.GetAllCategories().Select(c => new SelectListItem()
-                {
-                    Text = c.CategoryName,
-                    Value = c.CategoryId.ToString()
-                }).ToList();
+                ViewBag.Categories = GetCategories();
 
                 return View(albumVM);
             }
@@ -117,11 +120,7 @@ namespace CMSWebsite.Areas.Admin.Controllers
             {
                 album.Category = _categoryService.GetCategoryById(album.CategoryId);
 
-                ViewBag.Categories = _categoryService.GetAllCategories().Select(c => new SelectListItem()
-                {
-                    Text = c.CategoryName,
-                    Value = c.CategoryId.ToString()
-                }).ToList();
+                ViewBag.Categories = GetCategories();
 
                 AlbumViewModel albumVM = new AlbumViewModel()
                 {
@@ -136,6 +135,15 @@ namespace CMSWebsite.Areas.Admin.Controllers
             }
         }
 
+        public IEnumerable<SelectListItem> GetCategories()
+        {
+            return _categoryService.GetAllCategories().Select(c => new SelectListItem()
+            {
+                Text = c.CategoryName,
+                Value = c.CategoryId.ToString()
+            }).ToList();
+        }
+
         [HttpPost]
         public async Task<IActionResult> EditAlbumAsync(AlbumViewModel albumVM)
         {
@@ -144,27 +152,35 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 var result = await _imageService.AddImageAsync(albumVM.AlbumImageUrl);
 
                 var album = _albumService.GetAlbumById(albumVM.AlbumId);
-                await _imageService.DeleteImageAsync(album.PublicId);
+                
+                if(result.Error == null)
+                {
+                    await _imageService.DeleteImageAsync(album.PublicId);
 
-                album.AlbumId = albumVM.AlbumId;
-                album.Name = albumVM.Name;
-                album.ShortDescription = album.ShortDescription;
-                album.LongDescription = albumVM.LongDescription;
-                album.AlbumImageUrl = result.Url.ToString();
-                album.PublicId = result.PublicId.ToString();
-                album.CategoryId = albumVM.CategoryId;
+                    album.AlbumId = albumVM.AlbumId;
+                    album.Name = albumVM.Name;
+                    album.ShortDescription = album.ShortDescription;
+                    album.LongDescription = albumVM.LongDescription;
+                    album.AlbumImageUrl = result.Url.ToString();
+                    album.PublicId = result.PublicId.ToString();
+                    album.CategoryId = albumVM.CategoryId;
 
-                _albumService.EditAlbum(album);
+                    _albumService.EditAlbum(album);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = result.Error.Message.ToString();
+                    ViewBag.Categories = GetCategories();
+
+                    return View(albumVM);
+                }
+                
             }
             else
             {
-                ViewBag.Categories = _categoryService.GetAllCategories().Select(c => new SelectListItem()
-                {
-                    Text = c.CategoryName,
-                    Value = c.CategoryId.ToString()
-                }).ToList();
+                ViewBag.Categories = GetCategories();
 
                 return View(albumVM);
             }

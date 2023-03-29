@@ -7,6 +7,8 @@ using CMSWebsite.RepositoryInterfaces;
 using CMSWebsite.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -48,6 +50,7 @@ namespace CMSWebsite.Services
                 };
 
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
             }
 
             return uploadResult;

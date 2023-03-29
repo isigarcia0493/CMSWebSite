@@ -35,19 +35,6 @@
                 <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.ExpirationDate)
                 </dd>
-                <dt class="col-sm-6">
-                    @Html.DisplayNameFor(model => model.DisplayImage)
-                </dt>
-                <dd class="col-sm-6">
-                    @if (Model.DisplayImage == true)
-                    {
-                        <p>Yes</p>
-                    }
-                    else
-                    {
-                        <p>No</p>
-                    }
-                </dd>
             </dl>
             <div class="offset-4">
                 @Html.ActionLink("Edit", "EditCarousel", "Carousel", new { id = Model.CarouselId }, new { @class="btn btn-primary" }) |

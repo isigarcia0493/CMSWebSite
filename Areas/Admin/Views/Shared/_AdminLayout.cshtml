@@ -36,28 +36,35 @@
                                 <li class="nav-item @Html.IsActive("Dashboard", "Index")">
                                     @Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Category", "Index") @Html.IsActive("Category", "AddCategory") 
+                                @Html.IsActive("Category", "CategoryDetails") @Html.IsActive("Category", "EditCategory") @Html.IsActive("Category", "DeleteCategory")">
                                     @Html.ActionLink("Categories", "Index", "Category", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Album", "Index") @Html.IsActive("Album", "AddAlbum")
+                                @Html.IsActive("Album", "AlbumDetails") @Html.IsActive("Album", "EditAlbum") @Html.IsActive("Album", "DeleteAlbum")">
                                     @Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Image", "Index") @Html.IsActive("Image", "AddImage")
+                                @Html.IsActive("Image", "ImageDetails") @Html.IsActive("Image", "EditImage") @Html.IsActive("Image", "DeleteImage")">
                                     @Html.ActionLink("Photos", "Index", "Image", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Event", "Index") @Html.IsActive("Event", "AddEvent")
+                                @Html.IsActive("Event", "EventDetails") @Html.IsActive("Event", "EditEvent") @Html.IsActive("Event", "DeleteEvent")">
                                     @Html.ActionLink("Events", "Index", "Event", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Carousel", "Index") @Html.IsActive("Carousel", "AddCarousel")
+                                @Html.IsActive("Carousel", "CarouselDetails") @Html.IsActive("Carousel", "EditCarousel") @Html.IsActive("Carousel", "DeleteCarousel")">
                                     @Html.ActionLink("Carousel", "Index", "Carousel", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("FormMessage", "Index") @Html.IsActive("FormMessage", "FormMessageDetails") 
+                                @Html.IsActive("FormMessage", "DeleteFormMessage")"> 
                                     @Html.ActionLink("Messages", "Index", "FormMessage", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Administrator", "GetRoles") @Html.IsActive("Administrator", "AddRole")
+                                @Html.IsActive("Administrator", "EditRole") @Html.IsActive("Administrator", "AddUserToRole") @Html.IsActive("Administrator", "DeleteRole")">
                                     @Html.ActionLink("Roles", "GetRoles", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @Html.IsActive("Administrator", "ListUsers")">
                                     @Html.ActionLink("Users", "ListUsers", "Administrator", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
                                 <li class="nav-item">

@@ -133,3 +133,8 @@ dl dt{
     --bs-link-color: white;
     --bs-nav-link-color: white;
 }
+
+.btns{
+    width: 50%;
+    margin: 0px auto 0px auto;
+}

@@ -14,6 +14,7 @@
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class="text-danger" })
+                @TempData["Error"]
             </div>
             @Html.HiddenFor(model => model.AlbumId)
             <div class="inputs">

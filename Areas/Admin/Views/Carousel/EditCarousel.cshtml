@@ -14,6 +14,7 @@
             <div class="alert-danger" role="alert">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class="text-danger" })
+                @TempData["Error"]
             </div>
             @Html.HiddenFor(model => model.CarouselId)
             <div class="inputs">
@@ -46,13 +47,6 @@
                         @Html.LabelFor(model => model.ImageUrl, new { @class="required" })
                         @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control", type="file"})
                         @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class="text-danger" })
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="form-group col-6">
-                        @Html.LabelFor(model => model.DisplayImage)
-                        @Html.EditorFor(model => model.DisplayImage,  new { @class = "form-control" } )
-                        @Html.ValidationMessageFor(model => model.DisplayImage, "", new { @class="text-danger" })
                     </div>
                 </div>
                 <div class="row">

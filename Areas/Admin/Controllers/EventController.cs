@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
+using System.Web.Razor.Generator;
 
 namespace CMSWebsite.Areas.Admin.Controllers
 {
@@ -55,28 +56,37 @@ namespace CMSWebsite.Areas.Admin.Controllers
             {
                 var result = await _imageService.AddImageAsync(eventVM.ImageUrl);
 
-                var eventModel = new Event()
+                if(result.Error == null)
                 {
-                    EventName = eventVM.EventName,
-                    ShortDescription = eventVM.ShortDescription,
-                    LongDescription = eventVM.LongDescription,
-                    StartDate = eventVM.StartDate,
-                    EndDate = eventVM.EndDate,
-                    StartTime = eventVM.StartTime.ToString(),
-                    EndTime = eventVM.EndTime.ToString(),
-                    Address = eventVM.Address,
-                    City = eventVM.City,
-                    State = eventVM.State,
-                    ZipCode = eventVM.ZipCode,
-                    Email = eventVM.Email,
-                    PhoneNumber = eventVM.PhoneNumber,
-                    PublicId = result.PublicId.ToString(),
-                    ImageUrl = result.Url.ToString()
-                };
+                    var eventModel = new Event()
+                    {
+                        EventName = eventVM.EventName,
+                        ShortDescription = eventVM.ShortDescription,
+                        LongDescription = eventVM.LongDescription,
+                        StartDate = eventVM.StartDate,
+                        EndDate = eventVM.EndDate,
+                        StartTime = eventVM.StartTime.ToString(),
+                        EndTime = eventVM.EndTime.ToString(),
+                        Address = eventVM.Address,
+                        City = eventVM.City,
+                        State = eventVM.State,
+                        ZipCode = eventVM.ZipCode,
+                        Email = eventVM.Email,
+                        PhoneNumber = eventVM.PhoneNumber,
+                        PublicId = result.PublicId.ToString(),
+                        ImageUrl = result.Url.ToString()
+                    };
 
-                _eventService.AddEvent(eventModel);
+                    _eventService.AddEvent(eventModel);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = result.Error.Message.ToString();
+                    return View(eventVM);
+                }
+                
             }
             else
             {
@@ -138,29 +148,38 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var eventModel = _eventService.GetEventById(model.EventId);
-                await _imageService.DeleteImageAsync(eventModel.PublicId);
                 var result = await _imageService.AddImageAsync(model.ImageUrl);
+                var eventModel = _eventService.GetEventById(model.EventId);
+                
+                if(result.Error == null)
+                {
+                    await _imageService.DeleteImageAsync(eventModel.PublicId);
 
-                eventModel.EventName = model.EventName;
-                eventModel.ShortDescription = model.ShortDescription;
-                eventModel.LongDescription = model.LongDescription;
-                eventModel.StartDate = model.StartDate;
-                eventModel.EndDate = model.EndDate;
-                eventModel.StartTime = model.StartTime;
-                eventModel.EndTime = model.EndTime;
-                eventModel.Address = model.Address;
-                eventModel.City = model.City;
-                eventModel.State = model.State;
-                eventModel.ZipCode = model.ZipCode;
-                eventModel.Email = model.Email;
-                eventModel.PhoneNumber = model.PhoneNumber;
-                eventModel.PublicId = result.PublicId; 
-                eventModel.ImageUrl = result.Url.ToString();
+                    eventModel.EventName = model.EventName;
+                    eventModel.ShortDescription = model.ShortDescription;
+                    eventModel.LongDescription = model.LongDescription;
+                    eventModel.StartDate = model.StartDate;
+                    eventModel.EndDate = model.EndDate;
+                    eventModel.StartTime = model.StartTime;
+                    eventModel.EndTime = model.EndTime;
+                    eventModel.Address = model.Address;
+                    eventModel.City = model.City;
+                    eventModel.State = model.State;
+                    eventModel.ZipCode = model.ZipCode;
+                    eventModel.Email = model.Email;
+                    eventModel.PhoneNumber = model.PhoneNumber;
+                    eventModel.PublicId = result.PublicId;
+                    eventModel.ImageUrl = result.Url.ToString();
 
-                _eventService.EditEvent(eventModel);
+                    _eventService.EditEvent(eventModel);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = result.Error.Message.ToString();
+                    return View(model);
+                }             
             }
             else
             {

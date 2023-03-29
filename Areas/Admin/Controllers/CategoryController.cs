@@ -103,7 +103,7 @@ namespace CMSWebsite.Areas.Admin.Controllers
 
             if (category == null)
             {
-                return RedirectToAction("NotFound404", "Home");
+                return RedirectToAction("PageNotFound", "Dashboard");
             }
             else
             {
@@ -114,16 +114,9 @@ namespace CMSWebsite.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteCategory(Category model)
         {
-            if (ModelState.IsValid)
-            {
-                _categoryService.DeleteCategory(model.CategoryId);
+            _categoryService.DeleteCategory(model.CategoryId);
 
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return RedirectToAction("NotFound404", "Home");
-            }
+            return RedirectToAction("Index");
         }
     }
 }

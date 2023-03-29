@@ -34,8 +34,5 @@ namespace CMSWebsite.Models
         [Required(ErrorMessage = "An image is required")]        
         [DisplayName("Upload Image")]
         public string ImageUrl { get; set; }
-
-        [DisplayName("Image for Display?")]
-        public bool DisplayImage { get; set; }
     }
 }

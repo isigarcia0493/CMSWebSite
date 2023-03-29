@@ -8,44 +8,53 @@
     <div class="header">
         <h1>Details for @Model.CategoryName</h1>
     </div>
-    <div class="details">
-        <dl class="row mb-5">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CategoryName)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ShortDescription)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ShortDescription)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.LongDescription)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.LongDescription)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.LabelFor(model => model.Albums)
-            </dt>
-            @if (Model.Albums == null)
-            {
-                    <dd class="col-sm-10">There is not albums yet!</dd>
-            }
-            else
-            {
-                foreach (var album in Model.Albums)
+    <div class="detailsView">
+        <div class="details">
+            <dl class="row mb-5">
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.CategoryName)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.ShortDescription)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.ShortDescription)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.LongDescription)
+                </dt>       
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.LongDescription)
+                </dd>
+            </dl>
+            <div class="btns">
+                @Html.ActionLink("Edit", "EditCategory", "Category", new { id = Model.CategoryId }, new { @class="btn btn-primary" }) |
+                @Html.ActionLink("Back to List", "Index", "Category", new { id = Model.CategoryId }, new { @class="btn btn-secondary" })
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="photo">
+                <h2 class="mb-3">Albums</h2>
+            
+                @if (Model.Albums == null)
                 {
-                    <dd class="col-sm-10">@album.Name</dd>
+                    <div class="alert alert-warning" role="alert">
+                        <h3>There is not albums yet!</h3>
+                    </div>                        
                 }
-            }
-        </dl>
-        <div>
-            @Html.ActionLink("Edit", "EditAlbum", "Album", new { id = Model.CategoryId }, new { @class="btn btn-primary" }) |
-            @Html.ActionLink("Back to Albums", "Index", "Album", new { id = Model.CategoryId }, new { @class="btn btn-secondary" })
+                else
+                {
+                    foreach (var album in Model.Albums)
+                    {
+                        <ul>
+                            <li class="fs-5">@album.Name</li>
+                        </ul>
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>
