@@ -1,12 +1,71 @@
-﻿
+﻿@model DashboardViewModel
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dashboard";
 }
 
-<h1>Index from admin</h1>
-@Html.ActionLink("Details", "Details", "Dashboard", "", new { @class="nav-link text-dark" })
-@Html.ActionLink("Cateories", "Index", "Category", "", new { @class="nav-link text-dark" })
-@Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link text-dark" })
+<div class="container">
+    <div class="header mb-5">
+        <h1>Totals</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="stats">
+                <h1 class="statHeader">Albums</h1>
+                <div class="alert alert-dark col-6 ml-auto mr-auto" role="alert">
+                    <h3>@Model.Album.Count()</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stats">
+                <h1 class="statHeader">Categories</h1>
+                <div class="alert alert-dark col-6 ml-auto mr-auto" role="alert">
+                    <h3>@Model.Category.Count()</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="stats">
+                <h1 class="statHeader">Events</h1>
+                <div class="alert alert-dark col-6 ml-auto mr-auto" role="alert">
+                    <h3>@Model.Event.Count()</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stats">
+                <h1 class="statHeader">Images</h1>
+                <div class="alert alert-dark col-6 ml-auto mr-auto" role="alert">
+                    <h3>@Model.Image.Count()</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="stats">
+                <h1 class="statHeader">Messages</h1>
+                <div class="alert alert-dark col-6 ml-auto mr-auto" role="alert">
+                    <h3>@Model.Message.Count()</h3>
+                </div>
+            </div>
+        </div>
+@*        <div class="col-md-6">
+            <div class="stats">            
+                <h1 class="statHeader">Images</h1>
+                <div class="alert alert-info col-6 ml-auto mr-auto" role="alert">
+                        <h3>@Model.Image.Count()</h3>
+                </div>
+            <div>
+
+        </div>*@
+    </div>
+</div>
 
 
 

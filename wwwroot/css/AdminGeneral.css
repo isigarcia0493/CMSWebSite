@@ -98,3 +98,21 @@ dl dt{
     padding: 2% 0% 0% 3%
 }
 
+.stats {
+    text-align: center;
+    padding: 1%;
+    box-shadow: 0px 0px 10px black;
+}
+
+.statHeader {
+    margin-bottom: 5%;
+}
+
+.col {
+    padding: 0px 0px 0px 0px !important;
+}
+
+.navbar{
+    box-shadow: 0px 0px 10px lightblue;
+    margin-bottom: 1.5%;
+}
