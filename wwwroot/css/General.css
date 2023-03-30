@@ -5,10 +5,11 @@
 }
 
 body {
-    background-color: black;
-    background-image: url('../images/background/wedding.jpg');
-    background-repeat: no-repeat;
+    background-color: white;
+    background-image: url("../Images/Background/wedding.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+
 }
 
 footer {
@@ -19,7 +20,7 @@ footer {
 
 .mainWrapper {
     width: 80%;
-    height: 1000px;
+    min-height: 90vh;
     margin-left: auto;
     margin-right: auto;
     background: rgba(0, 0, 0, .7);
@@ -33,8 +34,13 @@ footer {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    padding: 2% 0% 1% 0%;
-    border-bottom: solid 1px lightgray;
+    padding-top: 1%;
+    padding-bottom: 5px;
+    border-bottom: solid 1px double;
+    box-shadow: 0px 0px 10px white;
+    border-radius: 0px 0px 15px 15px;
+    background-color: black;
+    color: white;
 }
 
 nav{
@@ -56,4 +62,31 @@ label{
 .required:after {
     content: " *";
     color: red;
+}
+
+.photo{
+    height: 90vh;
+}
+
+.carousel-caption{
+    background-color: black;
+    opacity: 0.8;
+    margin: 0px 0px 15% 0px;
+    padding: 3%;
+    align-items: center; 
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px blue; 
+}
+
+.Active{
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px black
+}
+
+.card{
+    box-shadow: 0px 0px 20px black;
+}
+
+.outsideCard{
+    margin-right: 2%;
 }

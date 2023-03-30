@@ -56,11 +56,6 @@ div ul li a {
     margin-right: auto;
 }
 
-.items-menu{
-    width: 100%;
-    color: white;
-    padding-left: 0 !important;
-}
 
 .nav-link:hover {
     background-color: white !important;

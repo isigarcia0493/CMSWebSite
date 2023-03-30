@@ -1,4 +1,5 @@
 ﻿using CMSWebsite.Models;
+using CMSWebsite.ServiceInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,15 +15,19 @@ namespace CMSWebsite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICarouselService _carouselService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICarouselService carouselService)
         {
             _logger = logger;
+            _carouselService = carouselService;
         }
 
         public IActionResult Index(bool viewBag)
         {
-            return View();
+            IEnumerable<Carousel> imagesList = _carouselService.GetAllCarousel().Where(c => c.ExpirationDate >= DateTime.Now).ToList();
+
+            return View(imagesList);
         }
 
 
