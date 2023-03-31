@@ -1,5 +1,6 @@
 ﻿using CMSWebsite.Models;
 using CMSWebsite.ServiceInterfaces;
+using CMSWebsite.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,20 +12,42 @@ namespace CMSWebsite.Controllers
     {
         private readonly IAlbumService _albumService;
         private readonly IImageService _imageService;
+        private readonly ICategoryService _categoryService;
 
-        public AlbumController(IAlbumService albumService, IImageService imageService)
+        public AlbumController(IAlbumService albumService, IImageService imageService, ICategoryService categoryService)
         {
             _albumService = albumService;
             _imageService = imageService;
+            _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(int? id)
         {
-            IEnumerable<Album> albums = _albumService.GetAllAlbums().ToList();
+            if(id == null)
+            {
+                AlbumCategoryViewModel albums = new AlbumCategoryViewModel()
+                {
+                    AlbumList = _albumService.GetAllAlbums().ToList(),
+                    CategoryList = _categoryService.GetAllCategories().ToList(),
+                };
 
-            return View(albums);
+                return View(albums);
+            }
+            else
+            {
+                AlbumCategoryViewModel albums = new AlbumCategoryViewModel()
+                {
+                    AlbumList = _albumService.GetAllAlbums().Where(c => c.CategoryId == id).ToList(),
+                    CategoryList = _categoryService.GetAllCategories().ToList(),
+                };
+
+                return View(albums);
+            }
+
         }
 
+        [HttpGet]
         public IActionResult Photos(int id)
         {
             var album = _albumService.GetAlbumById(id);

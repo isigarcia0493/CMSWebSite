@@ -91,6 +91,32 @@ label{
     box-shadow: 0px 0px 20px black;
 }
 
-.outsideCard{
-    margin-right: 2%;
+.albumsLayout{
+    width: 99%;
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.albumList {
+    background-color: lightgray;
+    min-height: 90vh;
+    box-shadow: 10px 10px 10px black;
+}
+
+.cardsContainer{
+    margin: 1% 0% 0% 4%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4%;
+}
+
+.cardContent {
+    margin: 2.5% 0% 4% 0%;
+}
+
+.albumHeader{
+    text-align: center;
+    padding: 2% 0% 0% 0%;
 }

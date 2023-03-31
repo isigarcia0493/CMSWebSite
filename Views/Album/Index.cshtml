@@ -1,28 +1,36 @@
-﻿@model IEnumerable<Album>
+﻿@model AlbumCategoryViewModel
 
 
-<div class="container-fluid pl-5">
-    <div class="header">
-        <h1>All Albums</h1>
+<div class="albumsLayout">
+    <div class="albumList">
+        <div class="albumHeader">
+            <h1>All Albums</h1>
+        </div>
+        <div class="albumItems">
+            <ul>
+                @foreach (var category in Model.CategoryList)
+                {
+                    <li><a asp-action="Index" asp-asp-controller="Album" asp-route-id="@category.CategoryId" class="btn btn-primary">@category.CategoryName</a></li>
+                }
+            </ul>
+        </div>
     </div>
-    <div class="row pt-3">
-        @foreach (var album in Model)
+    <div class="cardsContainer">
+        @foreach (var album in Model.AlbumList)
         {
-            <div class="col-md-2 d-flex justify-content-center">
-                <div class="outsideCard mt-3">
-                    <div class="card" style="width: 18rem;"> 
-                        <a class="text-decoration-none" href="@Url.ActionLink("Photos", "Album", new { id = album.AlbumId})">
-                            <div class="img-thumbnail p-3">
-                                <img src="@album.AlbumImageUrl" asp-append-version="true" class="card-img-top" alt="@album.ShortDescription" height="250">
-                            </div>                        
-                            <div class="card-body p-2" style="text-align: center">
-                                <h4 class="card-title fw-bold">@album.Name</h4>
-                                <p>@album.ShortDescription</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>                
+            <div class="cardContent">
+                <div class="card" style="width: 18rem;">
+                    <a class="text-decoration-none" href="@Url.ActionLink("Photos", "Album", new { id = album.AlbumId})">
+                        <div class="img-thumbnail p-3">
+                            <img src="@album.AlbumImageUrl" asp-append-version="true" class="card-img-top" alt="@album.ShortDescription" height="250">
+                        </div>
+                        <div class="card-body p-2" style="text-align: center">
+                            <h4 class="card-title fw-bold">@album.Name</h4>
+                            <p>@album.ShortDescription</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         }
     </div>
-</div>
+</div>        
