@@ -1,15 +1,13 @@
-﻿* {
+﻿/* General Page */
+* {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: white;
-    background-image: url("../Images/Background/wedding.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-
+    background-color: black;
+    background-image: linear-gradient(to bottom, white, black);
 }
 
 footer {
@@ -36,26 +34,18 @@ footer {
     margin-right: auto;
     padding-top: 1%;
     padding-bottom: 5px;
-    border-bottom: solid 1px double;
-    box-shadow: 0px 0px 10px white;
+    border-bottom: 1px groove gray;
+    box-shadow: 0px 0px 10px black;
     border-radius: 0px 0px 15px 15px;
-    background-color: black;
-    color: white;
+    color: black;
+    text-shadow: 0px 0px 20px white;
 }
 
 nav{
     margin-bottom: 0 !important;
 }
 
-.tables {
-    background-color: white;
-    width: 80%;
-    margin-top: 2%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-label{
+label {
     font-weight: bold;
 }
 
@@ -64,6 +54,19 @@ label{
     color: red;
 }
 
+
+
+/* Tables */
+.tables {
+    background-color: white;
+    width: 80%;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Carousel */
 .photo {
     height: 90vh;
 }
@@ -87,11 +90,27 @@ label{
     box-shadow: 0px 0px 5px black
 }
 
+
+/* Cards */
 .card{
     box-shadow: 0px 0px 20px black;
 }
 
-.albumsLayout{
+.card-info{
+    padding: 0% 5% 2% 5%;
+}
+
+.card-footer{
+    text-align: center;
+}
+
+.card-header{
+    text-align: center;
+}
+
+
+/* Album Layout */
+.albumsLayout {
     width: 99%;
     margin: 0px;
     padding: 0px;
@@ -106,14 +125,14 @@ label{
 }
 
 .cardsContainer{
-    margin: 1% 0% 0% 4%;
+    margin: 1% 2% 2% 4%;
     display: flex;
     flex-wrap: wrap;
-    gap: 4%;
+    gap: 3%;
 }
 
 .cardContent {
-    margin: 2.5% 0% 4% 0%;
+    margin: 1% 0% 2% 0%;
 }
 
 .albumHeader{

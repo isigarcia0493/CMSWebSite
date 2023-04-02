@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Event>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<div class="header">
+    <h1>Events</h1>
+</div>
+
+<div class="cardsContainer justify-content-center">
+    @foreach (var eventModel in Model)
+    {
+        <div class="cardContent">
+            <div class="card" style="width: 16rem;">
+                <div class="card-header">
+                    <h4 class="card-title fw-bold">@eventModel.EventName</h4>
+                </div>
+                <div class="img-thumbnail p-3">
+                    <img src="@eventModel.ImageUrl" asp-append-version="true" class="card-img-top" alt="@eventModel.ShortDescription" height="200">
+                </div>
+                <div class="card-info">
+                    <p>@eventModel.ShortDescription</p>
+                    <b>Date: </b>@eventModel.StartDate.ToString("d")
+                    <br />
+                    <b>Time: </b>@eventModel.StartTime
+                </div>
+                <div class="card-footer">
+                    @Html.ActionLink("+ Details", "EventDetails", "Event", new { id = eventModel.EventId}, new { @class="btn btn-info"}) |
+                    @Html.ActionLink("Register", "EventRegistration", "Event", new { id = eventModel.EventId}, new { @class="btn btn-success"}) 
+                </div>
+            </div>
+        </div>
+    }
+</div>
