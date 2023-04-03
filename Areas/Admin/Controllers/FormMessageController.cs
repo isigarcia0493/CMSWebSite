@@ -17,11 +17,27 @@ namespace CMSWebsite.Areas.Admin.Controllers
             _formMessageService = formMessageService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var messages = _formMessageService.GetAllMessages().OrderByDescending(m => m.DateOfMessage).ToList();
 
             return View(messages);
+        }
+
+        [HttpGet]
+        public IActionResult MessageDetails(int id)
+        {
+            var message = _formMessageService.GetMessageById(id);
+
+            if(message != null)
+            {
+                return View(message);
+            }
+            else
+            {
+                return RedirectToAction("PageNotFound", "Dashboard");
+            }
         }
     }
 }

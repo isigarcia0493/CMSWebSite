@@ -24,8 +24,8 @@
                 <td>@message.Subject</td>
                 <td>@message.DateOfMessage.ToString("d")</td>
                 <td style="text-align: center;">
-                    @Html.ActionLink("Details", "EventDetails", "Event", new{ id = message.FormMessageId }, new { @class="btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "DeleteEvent", "Event", new{ id = message.FormMessageId }, new { @class="btn btn-danger" })
+                    @Html.ActionLink("Details", "MessageDetails", "FormMessage", new{ id = message.FormMessageId }, new { @class="btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "DeleteMessage", "FormMessage", new{ id = message.FormMessageId }, new { @class="btn btn-danger" })
                 </td>
             </tr>
         }

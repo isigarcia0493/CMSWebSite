@@ -1,0 +1,39 @@
+﻿@model FormMessage
+
+@{
+    ViewData["Title"] = "Message Details";
+}
+
+<div>
+    <div class="header">
+        <h1>Message From @Model.FirstName @Model.LastName</h1>
+    </div>
+    <div class="detailsView">
+        <div class="details">
+            <dl class="row mb-5">
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.DateOfMessage)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.DateOfMessage)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Subject)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Subject)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Body)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Body)
+                </dd>               
+            </dl>
+            <div class="offset-5">
+                @Html.ActionLink("Delete", "DeleteMessage", "FormMessage", new { id = Model.FormMessageId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Back to List", "Index", "FormMessage", "", new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+</div>

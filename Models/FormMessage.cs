@@ -22,6 +22,7 @@ namespace CMSWebsite.Models
         public string LastName { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayName("Date and Time")]
         public DateTime DateOfMessage { get; set; }
 
         [Required(ErrorMessage = "Please type your subject")]
