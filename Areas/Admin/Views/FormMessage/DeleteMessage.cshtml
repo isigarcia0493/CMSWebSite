@@ -1,12 +1,12 @@
 ﻿@model FormMessage
 
 @{
-    ViewData["Title"] = "Message Details";
+    ViewData["Title"] = "Delete Message";
 }
 
 <div>
     <div class="header">
-        <h1>Message From @Model.FirstName @Model.LastName</h1>
+        <h1>Are you sure you want to delete this message?</h1>
     </div>
     <div class="detailsView">
         <div class="details">
@@ -28,11 +28,14 @@
                 </dt>
                 <dd class="col-sm-6">
                     @Html.DisplayFor(model => model.Body)
-                </dd>               
+                </dd>
             </dl>
             <div class="offset-5">
-                @Html.ActionLink("Delete", "DeleteMessage", "FormMessage", new { id = Model.FormMessageId }, new { @class = "btn btn-danger" }) |
-                @Html.ActionLink("Back to List", "Index", "FormMessage", "", new { @class = "btn btn-secondary" })
+                <form asp-action="DeleteMessage" asp-controller="FormMessage">
+                    <input type="hidden" asp-for="FormMessageId" />
+                    <input type="submit" value="Yes" class="btn btn-danger" /> |
+                    @Html.ActionLink("Cancel", "MessageDetails", "FormMessage", new { id = Model.FormMessageId }, new { @class = "btn btn-secondary" })
+                </form>
             </div>
         </div>
     </div>

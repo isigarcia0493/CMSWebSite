@@ -36,9 +36,11 @@
                     @Html.DisplayFor(model => model.Category.CategoryName)
                 </dd>
             </dl>
-            <div>
-                @Html.ActionLink("Edit", "EditAlbum", "Album", new { id = Model.AlbumId }, new { @class="btn btn-primary" }) |
-                @Html.ActionLink("Back to Albums", "Index", "Album", new { id = Model.AlbumId }, new { @class="btn btn-secondary" })
+            <div class="justify-content-center">
+                <div>
+                    @Html.ActionLink("Edit", "EditAlbum", "Album", new { id = Model.AlbumId }, new { @class="btn btn-primary" }) |
+                    @Html.ActionLink("Back to Albums", "Index", "Album", new { id = Model.AlbumId }, new { @class="btn btn-secondary" })
+                </div>
             </div>
         </div>
         <div class="col-6">
