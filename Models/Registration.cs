@@ -26,6 +26,7 @@ namespace CMSWebsite.Models
         public string DescribeAccomodations { get; set; }
 
         public ICollection<EventRegistration> EventRegistrations { get; set; }
+        public ICollection<Event> Events { get; set; }
 
 
         //Relationships

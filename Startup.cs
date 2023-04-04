@@ -51,6 +51,8 @@ namespace CMSWebsite
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<ICarouselRepository, CarouselRepository>();
             services.AddScoped<IFormMessageRepository, FormMessageRepository>();
+            services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+            services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
 
             //Services
             services.AddScoped<ICategoryService, CategoryService>();
@@ -59,6 +61,8 @@ namespace CMSWebsite
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<ICarouselService, CarouselService>();
             services.AddScoped<IFormMessageService, FormMessageService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IEventRegistrationService, EventRegistrationService>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
         }
 

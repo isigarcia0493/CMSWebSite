@@ -1,0 +1,52 @@
+﻿@model EventRegistrationViewModel
+
+@{
+    ViewData["Title"] = "Event Registration";
+}
+
+<div class="mainWrapper">
+    <div class="darkHeader">
+        <h1 class="text-white">Registration Form</h1>
+    </div>
+    <div class="form-container mt-4">
+        @using (Html.BeginForm("AddRegistration", "Registration", FormMethod.Post))
+        {
+            <div class="alert-danger" role="alert">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class="text-danger" })
+            </div>
+            <div class="inputs">
+                @Html.HiddenFor(model => model.Event.EventId)
+                <div class="row mb-4">
+                    <div class="form-group col-2">
+                        @Html.LabelFor(model => model.Registration.PeopleAttending)
+                        @Html.EditorFor(model => model.Registration.PeopleAttending, new { htmlAttributes = new { @class = "form-control required", min="0", oninput="validity.valid||(value='');"} })
+                        @Html.ValidationMessageFor(model => model.Registration.PeopleAttending, "", new { @class="text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(model => model.Registration.Accomodations) &nbsp;&nbsp;&nbsp;
+                        @Html.CheckBoxFor(model => model.Registration.Accomodations, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Registration.Accomodations, "", new { @class="text-danger" })
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="form-group col-12">
+                        @Html.LabelFor(model => model.Registration.DescribeAccomodations)
+                        @Html.TextAreaFor(model => model.Registration.DescribeAccomodations, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Registration.Accomodations, "", new { @class="text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <div class="buttons">
+                            <input type="submit" value="Register" class="btn btn-primary btn-lg" /> |
+                            @Html.ActionLink("Cancel", "Index", "Event", "", new { @class="btn btn-danger btn-lg" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

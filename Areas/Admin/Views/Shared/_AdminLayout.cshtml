@@ -52,6 +52,9 @@
                                 @Html.IsActive("Event", "EventDetails") @Html.IsActive("Event", "EditEvent") @Html.IsActive("Event", "DeleteEvent")">
                                     @Html.ActionLink("Events", "Index", "Event", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
                                 </li>
+                                <li class="nav-item @Html.IsActive("Registration", "Index") @Html.IsActive("Registration", "EventDetails") @Html.IsActive("Registration", "DeleteEventRegistered")">
+                                    @Html.ActionLink("Event Resgistrations", "Index", "Registration", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })
+                                </li>
                                 <li class="nav-item @Html.IsActive("Carousel", "Index") @Html.IsActive("Carousel", "AddCarousel")
                                 @Html.IsActive("Carousel", "CarouselDetails") @Html.IsActive("Carousel", "EditCarousel") @Html.IsActive("Carousel", "DeleteCarousel")">
                                     @Html.ActionLink("Carousel", "Index", "Carousel", "", new { @class="nav-link fs-5 ms-0 d-inline-block" })

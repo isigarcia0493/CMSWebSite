@@ -33,11 +33,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             List<Event> events = _eventService.GetAllEvents().ToList();
 
-            //foreach (var eventModel in events)
-            //{
-            //    album.Category = _categoryService.GetCategoryById(album.CategoryId);
-            //}
-
             return View(events);
         }
 

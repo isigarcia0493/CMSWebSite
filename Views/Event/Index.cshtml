@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-footer">
                     @Html.ActionLink("+ Details", "EventDetails", "Event", new { id = eventModel.EventId}, new { @class="btn btn-info"}) |
-                    @Html.ActionLink("Register", "EventRegistration", "Event", new { id = eventModel.EventId}, new { @class="btn btn-success"}) 
+                    @Html.ActionLink("Register", "Index", "Registration", new { id = eventModel.EventId}, new { @class="btn btn-success"}) 
                 </div>
             </div>
         </div>
