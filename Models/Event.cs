@@ -86,6 +86,6 @@ namespace CMSWebsite.Models
         [DisplayName("Upload Photo")]
         public string ImageUrl { get; set; }
 
-        public ICollection<EventRegistration> EventRegistrations { get; set; }
+        public IEnumerable<EventRegistration> EventRegistrations { get; set; }
     }
 }

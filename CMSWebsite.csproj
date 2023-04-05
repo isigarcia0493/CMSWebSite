@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20230304021121_ExtendIdentityUser.Designer.cs" />
     <Compile Remove="Migrations\20230304023105_Fixthelength.cs" />
     <Compile Remove="Migrations\20230304023105_Fixthelength.Designer.cs" />
+    <Compile Remove="Migrations\20230405183637_AddEnumarable.cs" />
+    <Compile Remove="Migrations\20230405183637_AddEnumarable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

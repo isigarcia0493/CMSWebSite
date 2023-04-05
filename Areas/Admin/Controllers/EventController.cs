@@ -21,17 +21,40 @@ namespace CMSWebsite.Areas.Admin.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IImageService _imageService;
+        private readonly IEventRegistrationService _eventRegistrationService;
+        private readonly IRegistrationService _registrationService;
 
-        public EventController(IEventService eventService, IImageService imageService)
+        public EventController(IEventService eventService, IImageService imageService, IEventRegistrationService eventRegistration, IRegistrationService registrationService)
         {
             _eventService = eventService;
             _imageService = imageService;
+            _eventRegistrationService = eventRegistration;
+            _registrationService = registrationService;
         }
 
 
         public IActionResult Index()
         {
-            List<Event> events = _eventService.GetAllEvents().ToList();
+            List<Event> events = _eventService.GetAllEvents().ToList();            
+
+            foreach (var model in events)
+            {
+                var registrationModel = _eventRegistrationService.GetAllEventRegistration().Where(e => e.EventId == model.EventId);
+
+                if (model.EventRegistrations != null)
+                {
+                    foreach (var registration in model.EventRegistrations)
+                    {
+                        foreach (var item in registrationModel)
+                        {
+                            registration.EventId = item.EventId;
+                            registration.Event = _eventService.GetEventById(item.EventId);
+                            registration.RegistrationId = item.RegistrationId;
+                            registration.Registration = _registrationService.GetRegistrationById(item.RegistrationId);
+                        }
+                    }
+                }                
+            }
 
             return View(events);
         }

@@ -7,7 +7,16 @@
 <div class="mainWrapper">
     <div>
         <div class="header">
-            <h1>Registrations</h1>
+            @if (ViewBag.Event == null)
+            {
+
+                <h1>All Registrations</h1>
+
+            }
+            else
+            {
+                <h1>Registrations for @ViewBag.Event</h1>
+            }
         </div>
     </div>
     <table class="table table-bordered tables">

@@ -12,8 +12,9 @@
     </div>
     <table class="table table-bordered tables">
         <tr class="thead-dark">
-            <th style="width: 30%;">Event Name</th>
-            <th style="width: 30%;">Start Date</th>
+            <th style="width: 20%;">Event Name</th>
+            <th style="width: 20%;">Start Date</th>           
+            <th style="width: 20%;">People Registered</th>           
             <th style="width: 20%; text-align: center;">Image</th>
             <th style="width: 20%; text-align: center;">
                 @Html.ActionLink("Create Event", "CreateEvent", "Event", "", new { @class="btn btn-success" })
@@ -24,6 +25,15 @@
             <tr>
                 <td>@item.EventName</td>
                 <td>@item.StartDate.ToString("d")</td>
+                <td style="text-align: center;">
+                    @if(item.EventRegistrations != null){
+                        <a href="@Url.ActionLink("Index", "Registration", new { id = item.EventId})">@item.EventRegistrations.Count()</a>
+                    }
+                    else
+                    {
+                        <p>0</p>
+                    }
+                </td>
                 <td style="text-align: center;"><img src="@item.ImageUrl" alt="@item.ShortDescription" width="50" height="50" /></td>
                 <td style="text-align: center;">
                     @Html.ActionLink("Details", "EventDetails", "Event", new{ id = item.EventId }, new { @class="btn btn-primary" }) |

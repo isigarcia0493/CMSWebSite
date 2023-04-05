@@ -28,24 +28,53 @@ namespace CMSWebsite.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
-            var registrations = _registrationService.GetAllRegistrations();
-            var users = _userManager.Users.Where(u => u.Email == User.Identity.Name).FirstOrDefault();
-            List<EventRegistration> eventRegistrations = _eventRegistrationService.GetAllEventRegistration().ToList();
-
-
-            foreach (var registration in registrations)
+            if(id == null)
             {
-                foreach (var eventRegistration in eventRegistrations) 
+                var registrations = _registrationService.GetAllRegistrations();
+                var users = _userManager.Users.Where(u => u.Email == User.Identity.Name).FirstOrDefault();
+                List<EventRegistration> eventRegistrations = _eventRegistrationService.GetAllEventRegistration().ToList();
+
+
+                foreach (var registration in registrations)
                 {
-                    registration.Events = _eventService.GetAllEvents().Where(e => e.EventId == eventRegistration.EventId).ToList();
+                    foreach (var eventRegistration in eventRegistrations)
+                    {
+                        registration.Events = _eventService.GetAllEvents().Where(e => e.EventId == eventRegistration.EventId).ToList();
+                    }
+
+                    registration.User = _userManager.Users.Where(u => u.Id == registration.UserId).FirstOrDefault();
                 }
 
-                registration.User = _userManager.Users.Where(u => u.Id == registration.UserId).FirstOrDefault();
+                return View(registrations);
             }
+            else
+            {
+                var registrations = _registrationService.GetAllRegistrations();
+                List<Registration> newRegistrations = new List<Registration>();
+                var users = _userManager.Users.Where(u => u.Email == User.Identity.Name).FirstOrDefault();
+                List<EventRegistration> eventRegistrations = _eventRegistrationService.GetAllEventRegistration().ToList();
 
-            return View(registrations);
+                foreach (var registration in registrations)
+                {
+                    foreach (var eventRegistration in eventRegistrations)
+                    {
+                        if(eventRegistration.EventId == id)
+                        {
+                            registration.Events = _eventService.GetAllEvents().Where(e => e.EventId == eventRegistration.EventId).ToList();
+                            registration.User = _userManager.Users.Where(u => u.Id == registration.UserId).FirstOrDefault();
+
+                            newRegistrations.Add(registration);
+                        }
+                    }                   
+                }
+
+                var eventModel = _eventService.GetEventById((int)id);
+                ViewBag.Event = eventModel.EventName;
+
+                return View(newRegistrations);
+            }
         }
     }
 }
