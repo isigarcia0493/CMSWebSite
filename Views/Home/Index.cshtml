@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    int i = 0;
 }
 @if (TempData["success"] != null)
 {
@@ -24,12 +23,23 @@
 else
 {
     <div id="carouselCaptions" class="carousel carousel-fade slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                string active = "active";
+                <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="@i" class="@active" aria-current="true" aria-label="Slide @i"></button>
+            }
+        </div>
+
         <div class="carousel-inner">
             @foreach (var item in Model)
             {
-                i++;
-                var active = i == 1 ? "active" : "";
+                string active = "";
 
+                if (item.ImageName == Model.First().ImageName)
+                {
+                    active = "active";
+                }
                 <div class="carousel-item @active">
                     <img src="@item.ImageUrl" class="d-block w-100 photo" alt="@item.ImageName">
                     <div class="carousel-caption d-none d-md-block">
