@@ -7,13 +7,21 @@
 <div class="albumsLayout">
     <div class="albumList">
         <div class="albumHeader">
-            <h1>All Albums</h1>
+            @if (@ViewBag.CategoryName == null)
+            {
+                <h1>All Albums</h1>
+            }
+            else
+            {
+                <h1>@ViewBag.CategoryName</h1>
+            }
         </div>
         <div class="albumItems">
-            <ul>
+            <ul class="categoryList justify-content-center">
+                <li><a asp-action="Index" asp-asp-controller="Album" asp-route-id=null class="btn btn-block btn-primary fs-4">All Albums</a></li>
                 @foreach (var category in Model.CategoryList)
                 {
-                    <li><a asp-action="Index" asp-asp-controller="Album" asp-route-id="@category.CategoryId" class="btn btn-primary">@category.CategoryName</a></li>
+                    <li><a asp-action="Index" asp-asp-controller="Album" asp-route-id="@category.CategoryId" class="btn btn-block btn-primary fs-4">@category.CategoryName</a></li>
                 }
             </ul>
         </div>

@@ -32,6 +32,7 @@ namespace CMSWebsite.Controllers
                     CategoryList = _categoryService.GetAllCategories().ToList(),
                 };
 
+                ViewBag.CategoryName = "All Albums";
                 return View(albums);
             }
             else
@@ -41,6 +42,10 @@ namespace CMSWebsite.Controllers
                     AlbumList = _albumService.GetAllAlbums().Where(c => c.CategoryId == id).ToList(),
                     CategoryList = _categoryService.GetAllCategories().ToList(),
                 };
+
+                var category = _categoryService.GetCategoryById((int)id);
+
+                ViewBag.CategoryName = category.CategoryName;
 
                 return View(albums);
             }
