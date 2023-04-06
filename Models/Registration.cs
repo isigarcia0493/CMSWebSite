@@ -12,6 +12,27 @@ namespace CMSWebsite.Models
         [Key]
         public int RegistrationId { get; set; }
         
+        [Required(ErrorMessage = "Please enter your first name")]
+        [MaxLength(50)]
+        [DisplayName("First Name")]
+        public string FirstName{ get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name")]
+        [MaxLength(50)]
+        [DisplayName("Last Name")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
+        [DisplayName("Email")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required")]
+        [StringLength(20)]
+        [DisplayName("Phone Number")]
+        public string PhoneNumber { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime RegistrationDate { get; set; }
 

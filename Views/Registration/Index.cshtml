@@ -17,7 +17,36 @@
             </div>
             <div class="inputs">
                 @Html.HiddenFor(model => model.Event.EventId)
+                <div class="row mb4">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Registration.FirstName, new {@class="required"})
+                        @Html.EditorFor(model => model.Registration.FirstName, new { htmlAttributes = new { @class = "form-control required"} })
+                        @Html.ValidationMessageFor(model => model.Registration.FirstName, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Registration.LastName, new {@class="required"})
+                        @Html.EditorFor(model => model.Registration.LastName, new { htmlAttributes = new { @class = "form-control required"} })
+                        @Html.ValidationMessageFor(model => model.Registration.LastName, "", new { @class="text-danger" })
+                    </div>
+                </div>
+                <div class="row mb4">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Registration.Email, new {@class="required"})
+                        @Html.EditorFor(model => model.Registration.Email, new { htmlAttributes = new { @class = "form-control required"} })
+                        @Html.ValidationMessageFor(model => model.Registration.Email, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Registration.PhoneNumber, new {@class="required"})
+                        @Html.EditorFor(model => model.Registration.PhoneNumber, new { htmlAttributes = new { @class = "form-control required"} })
+                        @Html.ValidationMessageFor(model => model.Registration.PhoneNumber, "", new { @class="text-danger" })
+                    </div>
+                </div>
                 <div class="row mb-4">
+                    <div class="form-group col-6">
+                        @Html.LabelFor(model => model.Registration.Accomodations) &nbsp;&nbsp;&nbsp;
+                        @Html.CheckBoxFor(model => model.Registration.Accomodations, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Registration.Accomodations, "", new { @class="text-danger" })
+                    </div>
                     <div class="form-group col-2">
                         @Html.LabelFor(model => model.Registration.PeopleAttending)
                         @Html.EditorFor(model => model.Registration.PeopleAttending, new { htmlAttributes = new { @class = "form-control required", min="0", oninput="validity.valid||(value='');"} })
@@ -25,13 +54,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-6">
-                        @Html.LabelFor(model => model.Registration.Accomodations) &nbsp;&nbsp;&nbsp;
-                        @Html.CheckBoxFor(model => model.Registration.Accomodations, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Registration.Accomodations, "", new { @class="text-danger" })
-                    </div>
-                </div>
-                <div class="row mb-4">
                     <div class="form-group col-12">
                         @Html.LabelFor(model => model.Registration.DescribeAccomodations)
                         @Html.TextAreaFor(model => model.Registration.DescribeAccomodations, new { @class = "form-control" })

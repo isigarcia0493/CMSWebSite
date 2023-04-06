@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Registration>
+﻿@model IEnumerable<EventRegistration>
 
 @{
     ViewData["Title"] = "Registrations";
+    int total = 0;
 }
 
 <div class="mainWrapper">
@@ -28,10 +29,13 @@
         </tr>
         @foreach (var registration in Model)
         {
+            total += @registration.Registration.PeopleAttending;
             <tr>
-                <td>@registration.User.FirstName @registration.User.LastName</td>
-                <td>@registration.PeopleAttending</td>
-                @foreach(var eventModel in registration.Events)
+                <td>@registration.Registration.FirstName @registration.Registration.FirstName</td>
+                <td>
+                    @registration.Registration.PeopleAttending
+                </td>
+                @foreach(var eventModel in registration.Registration.Events)
                 {
                     <td>@eventModel.EventName</td>
                 }
@@ -42,4 +46,8 @@
             </tr>
         }
     </table>
+    <div class="totalHeader">
+        <h3>Total People Coming to the Event</h3>
+        <div class="totalCount">@total</div>
+    </div>
 </div>

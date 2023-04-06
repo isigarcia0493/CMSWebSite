@@ -27,7 +27,7 @@ namespace CMSWebsite.Controllers
         public IActionResult Index(int id)
         {
             var eventModel = _eventService.GetEventById(id);
-            EventRegistrationViewModel registrationVM = new EventRegistrationViewModel();            
+            EventRegistrationViewModel registrationVM = new EventRegistrationViewModel();
 
             if (eventModel != null)
             {
@@ -50,6 +50,10 @@ namespace CMSWebsite.Controllers
                 var users = _userManager.Users.Where(u => u.Email == User.Identity.Name).ToList();
                 Registration registration = new Registration()
                 {
+                    FirstName = model.Registration.FirstName,
+                    LastName = model.Registration.LastName,
+                    Email = model.Registration.Email,
+                    PhoneNumber = model.Registration.PhoneNumber,
                     RegistrationDate = DateTime.Now,
                     PeopleAttending = model.Registration.PeopleAttending,
                     Accomodations = model.Registration.Accomodations,
@@ -59,6 +63,7 @@ namespace CMSWebsite.Controllers
                 if (users.Count > 0)
                 {
                     registration.UserId = users[0].Id;
+                    
                 }
 
 
