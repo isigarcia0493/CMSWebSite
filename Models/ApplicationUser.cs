@@ -27,6 +27,7 @@ namespace CMSWebsite.Models
 
         [Required(ErrorMessage = "Please enter your date of birth")]
         [DataType(DataType.Date)]
+        [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Please enter your Address")]
@@ -46,7 +47,7 @@ namespace CMSWebsite.Models
 
         [Required(ErrorMessage = "Please enter your zip code")]
         [DisplayName("First Name")]
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         public ICollection<Registration> Registrations { get; set; }
         public ICollection<FormMessage> FormMessages { get; set; }

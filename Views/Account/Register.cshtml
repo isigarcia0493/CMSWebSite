@@ -1,79 +1,99 @@
 ﻿@model RegisterViewModel
+@using CMSWebsite.Models.Enums
 
 @{
     ViewData["Title"] = "Registration Form";
 }
 
-<div class="row">
-    <div class="form-row">
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken();
-                @Html.ValidationSummary("", new { @class="text-danger" })               
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.UserEmail, new { @class="required" })
-                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class="text-danger" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Password, new { @class="required" })
-                    @Html.PasswordFor(model => model.Password, new { @class="form-control" })
-                    @Html.ValidationMessageFor(model => model.Password, "",new { @class="text-danger" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PasswordConfirmation, new { @class="required" })
-                    @Html.PasswordFor(model => model.PasswordConfirmation, new { @class="form-control" })
-                    @Html.ValidationMessageFor(model => model.PasswordConfirmation, "",new { @class="text-danger" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FirstName, new { @class="required" })
+<div class="registerBox">
+    <div class="registerForm">
+        <div class="registerIcon">
+            <img src="~/images/register.png" width="350" height="200" />
+        </div>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()            
+            @Html.ValidationSummary("", new { @class="text-danger" })
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.FirstName, new { @class="required text-white" })
                     @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.FirstName, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.MiddleName, new { @class="required" })
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.MiddleName, new { @class="required text-white" })
                     @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MiddleName, "",new { @class="text-danger" })
                 </div>
-                 <div class="form-group">
-                    @Html.LabelFor(model => model.LastName, new { @class="required" })
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.LastName, new { @class="required text-white" })
                     @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.LastName, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DateOfBirth, new { @class="required" })
-                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.DateOfBirth, new { @class="required text-white" })
+                    @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", type="date"})
                     @Html.ValidationMessageFor(model => model.DateOfBirth, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PhoneNumber, new { @class="required" })
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.PhoneNumber, new { @class="required text-white" })
                     @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PhoneNumber, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Address, new { @class="required" })
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.Address, new { @class="required text-white" })
                     @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Address, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.City, new { @class="required" })
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.City, new { @class="required text-white" })
                     @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.City, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.State, new { @class="required" })
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.State, new { @class="required text-white" })
+                    @Html.DropDownListFor(model => model.State, Model.States, "-- Select One --", new { @class = "form-control custom-select mr-sm-2" })
                     @Html.ValidationMessageFor(model => model.State, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ZipCode, new { @class="required" })
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.ZipCode, new { @class="required text-white" })
                     @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ZipCode, "",new { @class="text-danger" })
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Register" class="btn btn-primary" />         
+            </div>
+            <div class="row">
+                
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.UserEmail, new { @class="required text-white" })
+                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class="text-danger" })
                 </div>
-            }           
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.Password, new { @class="required text-white" })
+                    @Html.PasswordFor(model => model.Password, new { @class="form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, "",new { @class="text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.PasswordConfirmation, new { @class="required" })
+                    @Html.PasswordFor(model => model.PasswordConfirmation, new { @class="form-control" })
+                    @Html.ValidationMessageFor(model => model.PasswordConfirmation, "",new { @class="text-danger" })
+                </div> 
+            </div>
+            <div class="row mt-3">
+                <div class="form-group col-12">
+                    <div class="btns">
+                    <input type="submit" value="Register" class="btn btn-primary" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("Login", "Login", "Account", "", new { @class="btn btn-success" })
+                    </div>
+                </div>
+           </div>
+        }
     </div>
-</div>
+</div>   

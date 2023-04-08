@@ -10,10 +10,10 @@ body {
     background-image: linear-gradient(to bottom, white, black);
 }
 
-footer {
+footer div {
     text-align: center;
     background-color: #fff !important;
-    color: black;
+    color: black !important;
 }
 
 .photoDiv{
@@ -31,7 +31,7 @@ footer {
     color: white;
 }
 
-.header{
+.header {
     text-align: center;
     width: 80%;
     margin-left: auto;
@@ -89,6 +89,7 @@ label {
 .btns {
     width: 50%;
     margin: 0px auto 0px auto;
+    text-align: center;
 }
 
 
@@ -109,18 +110,16 @@ label {
 }
 
 .carousel-caption {
-    background-color: black;
-    opacity: 0.8;
-    margin: 0px 0px 15% 0px;
-    padding: 3%;
-    align-items: center;
-    border-radius: 25px;
-    box-shadow: 0px 0px 20px blue;
+    font-size: 2.0rem;
 }
 
 .Active{
     border-radius: 15px;
     box-shadow: 0px 0px 5px black
+}
+
+.imageHeader{
+    font-size: 3rem;
 }
 
 
@@ -208,4 +207,43 @@ label {
     text-align: center;
     padding: 3% 0% 0%;
     border-bottom: 3px solid gray
+}
+
+
+/* Login Page and Register Pages */
+
+.loginBox {
+    width: 50%;
+    margin: 5% auto 0% auto;
+    border: 2px outset black;
+    box-shadow: 0px 0px 40px white;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, .5);
+}
+
+.registerBox {
+    width: 50%;
+    margin: 1% auto 0% auto;
+    border: 2px outset black;
+    box-shadow: 0px 0px 40px white;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, .5);
+}
+
+.loginForm {
+    padding: 2%;
+    text-align: center;
+}
+
+#Email:hover, #Password:hover {
+    box-shadow: 0px 0px 20px cyan;
+}
+
+.registerIcon{
+    padding: 2% 0% 0% 0%;
+    text-align: center;
+}
+
+.registerForm {
+    padding: 4%;
 }

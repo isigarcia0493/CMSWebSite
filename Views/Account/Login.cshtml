@@ -4,27 +4,38 @@
     ViewData["Title"] = "Log In";
 }
 
-<div class="row">
-    <div class="form-row">
+<div class="loginBox">
+    <div class="loginForm">
+        <div class="loginIcon">
+            <img src="~/images/login.png" width="200" height="200"/>
+        </div>
         @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
             @Html.ValidationSummary("", new { @class="text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, new { @class="required" })
-                @Html.TextBoxFor(model => model.Email, new { @class="form-control" })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class="text-danger" })
+            <div class="row justify-content-center">
+                <div class="form-group col-md-6 mb-3">
+                    @Html.TextBoxFor(model => model.Email, new { @class="form-control fs-5", placeholder="Enter Email..." })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class="text-danger" })
+                </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, new { @class="required" })
-                @Html.PasswordFor(model => model.Password, new { @class="form-control" })
-                @Html.ValidationMessageFor(model => model.Password, "",new { @class="text-danger" })
+            <div class="row justify-content-center">
+                <div class="form-group col-md-6 mb-3">
+                    @Html.PasswordFor(model => model.Password, new { @class="form-control fs-5", placeholder="Enter Password..."  })
+                    @Html.ValidationMessageFor(model => model.Password, "",new { @class="text-danger" })
+                </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.RememberMe)
-                @Html.CheckBoxFor(model => model.RememberMe, new { @class="checkbox" })           
+            <div class="row justify-content-center">
+                <div class="form-group mb-5">
+                    @Html.LabelFor(model => model.RememberMe, new { @class="text-white" }) 
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.CheckBoxFor(model => model.RememberMe, new { @class="checkbox" })
+                </div>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="submit" value="Login" class="btn btn-success" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Register", "Register", "Account", "", new { @class="btn btn-warning" })
             </div>
         }
     </div>

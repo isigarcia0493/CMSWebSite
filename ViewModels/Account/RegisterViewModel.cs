@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CMSWebsite.Helpers;
+using CMSWebsite.Models.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -38,6 +42,7 @@ namespace CMSWebsite.ViewModels.Account
 
         [Required(ErrorMessage = "Please enter your date of birth")]
         [DataType(DataType.Date)]
+        [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Please enter your phone number")]
@@ -61,7 +66,25 @@ namespace CMSWebsite.ViewModels.Account
         public string State { get; set; }
 
         [Required(ErrorMessage = "Please enter your zip code")]
-        [DisplayName("First Name")]
-        public int ZipCode { get; set; }
+        [DisplayName("Zip Code")]
+        public string ZipCode { get; set; }
+
+        public IEnumerable<SelectListItem> States
+        {
+            get
+            {
+                var options = new List<SelectListItem>();
+
+                foreach (States option in Enum.GetValues(typeof(States)))
+                {
+                    options.Add(new SelectListItem()
+                    {
+                        Text = AttExtension.GetDescription(option),
+                        Value = option.ToString(),
+                    });
+                }
+                return options;
+            }
+        }
     }
 }

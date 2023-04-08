@@ -1,4 +1,5 @@
-﻿using CMSWebsite.Models;
+﻿using CMSWebsite.Areas.Admin.ViewModels;
+using CMSWebsite.Models;
 using CMSWebsite.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +23,9 @@ namespace CMSWebsite.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            RegisterViewModel registerVM = new RegisterViewModel();
+
+            return View(registerVM);
         }
 
         [HttpPost]
