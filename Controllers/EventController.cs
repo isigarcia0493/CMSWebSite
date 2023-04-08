@@ -1,4 +1,5 @@
 ﻿using CMSWebsite.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -14,6 +15,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var events = _eventSetvice.GetAllEvents().ToList();
@@ -22,6 +24,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult EventDetails(int id)
         {
             if(id != 0)

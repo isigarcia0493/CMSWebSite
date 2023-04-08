@@ -1,6 +1,7 @@
 ﻿using CMSWebsite.Models;
 using CMSWebsite.ServiceInterfaces;
 using CMSWebsite.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace CMSWebsite.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index(int? id)
         {
             if(id == null)
