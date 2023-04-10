@@ -12,8 +12,13 @@
         </div>
         @using (Html.BeginForm("Register", "Account", FormMethod.Post))
         {
-            @Html.AntiForgeryToken()            
-            @Html.ValidationSummary("", new { @class="text-danger" })
+            @Html.AntiForgeryToken()
+            if (!Html.ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Html.ValidationSummary()
+                </div>
+            }
             <div class="row">
                 <div class="form-group col-md-6">
                     @Html.LabelFor(model => model.FirstName, new { @class="required text-white" })

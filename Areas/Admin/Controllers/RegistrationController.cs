@@ -68,5 +68,33 @@ namespace CMSWebsite.Areas.Admin.Controllers
 
             return View(registration);
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var registration = _registrationService.GetRegistrationById(id);
+            var eventRegistrations = _eventRegistrationService.GetAllEventRegistration().Where(er => er.EventId == id);
+
+            if (registration == null)
+            {
+                return RedirectToAction("NotFound404", "Home");
+            }
+            else
+            {
+                registration.Events = _registrationService.GetEventsByRegistrationId(id).ToList();
+            }
+
+            return View(registration);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Registration model)
+        {
+            var registration = _registrationService.GetRegistrationById(model.RegistrationId);
+
+            _registrationService.DeleteRegistration(registration.RegistrationId);
+
+            return RedirectToAction("Index", "Event");
+        }
     }
 }

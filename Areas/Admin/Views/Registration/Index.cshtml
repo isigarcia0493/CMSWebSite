@@ -20,6 +20,10 @@
             }
         </div>
     </div>
+    <div class="totalHeader">
+        <h3>Total People Coming to the Event</h3>
+        <div class="totalCount">@total</div>
+    </div>
     <table class="table table-bordered tables">
         <tr class="thead-dark">
             <th style="width: 30%;">Full Name</th>
@@ -41,13 +45,9 @@
                 }
                 <td style="text-align: center;">
                     @Html.ActionLink("Details", "Details", "Registration", new{ id = registration.RegistrationId }, new { @class="btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "DeleteRegistration", "Registration", new{ id = registration.RegistrationId }, new { @class="btn btn-danger" })
+                    @Html.ActionLink("Delete", "Delete", "Registration", new{ id = registration.RegistrationId }, new { @class="btn btn-danger" })
                 </td>
             </tr>
         }
     </table>
-    <div class="totalHeader">
-        <h3>Total People Coming to the Event</h3>
-        <div class="totalCount">@total</div>
-    </div>
 </div>

@@ -11,17 +11,22 @@
         </div>
         @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
-            @Html.ValidationSummary("", new { @class="text-danger" })
+            if (!Html.ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Html.ValidationSummary()
+                </div>
+            }
             <div class="row justify-content-center">
                 <div class="form-group col-md-6 mb-3">
                     @Html.TextBoxFor(model => model.Email, new { @class="form-control fs-5", placeholder="Enter Email..." })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class="text-danger" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class="text-danger fs-4" })
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="form-group col-md-6 mb-3">
                     @Html.PasswordFor(model => model.Password, new { @class="form-control fs-5", placeholder="Enter Password..."  })
-                    @Html.ValidationMessageFor(model => model.Password, "",new { @class="text-danger" })
+                    @Html.ValidationMessageFor(model => model.Password, "",new { @class="text-danger fs-4" })
                 </div>
             </div>
             <div class="row justify-content-center">
