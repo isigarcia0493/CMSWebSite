@@ -35,5 +35,12 @@ namespace CMSWebsite.ServiceInterfaces
         /// </summary>
         /// <param name="id"></param>
         void DeleteRegistration(int id);
+
+        /// <summary>
+        /// Returns a list of events with the matching registration id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List of events</returns>
+        public IEnumerable<Event> GetEventsByRegistrationId(int id);
     }
 }

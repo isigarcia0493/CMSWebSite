@@ -8,7 +8,7 @@
     <div class="header">
         <h1>Details for Registration</h1>
     </div>
-    <div class="detailsView">
+    <div class="detailsViewRegistration">
         <div class="details">
             <dl class="row mb-5">
                 <dt class="col-sm-6">
@@ -63,10 +63,12 @@
                     @Html.DisplayNameFor(model => model.Events)
                 </dt>
                 <dd class="col-sm-6">
-                    @foreach (var item in Model.Events)
-                    {
-                        @item.EventName
-                    }
+                    <ul>
+                        @foreach (var item in Model.Events)
+                        {
+                            <li>@item.EventName</li>
+                        }
+                    </ul>
                 </dd>
             </dl>
             <div class="justify-content-center">

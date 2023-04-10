@@ -54,15 +54,19 @@ namespace CMSWebsite.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var eventRegistrations = _eventRegistrationService.GetAllEventRegistration().Where(er => er.RegistrationId == id);
+            var registration = _registrationService.GetRegistrationById(id);
+            var eventRegistrations = _eventRegistrationService.GetAllEventRegistration().Where(er => er.EventId == id);
 
-            foreach (var item in eventRegistrations)
+            if (registration == null)
             {
-                item.Registration = _registrationService.GetRegistrationById(item.RegistrationId);
-                item.Registration.Events = _eventService.GetAllEvents().Where(e => e.EventId == item.EventId).ToList();
+                return RedirectToAction("NotFound404", "Home");
+            }
+            else
+            {
+                registration.Events = _registrationService.GetEventsByRegistrationId(id).ToList();
             }
 
-            return View(eventRegistrations);
+            return View(registration);
         }
     }
 }
