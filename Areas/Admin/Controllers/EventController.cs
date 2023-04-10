@@ -166,12 +166,44 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _imageService.AddImageAsync(model.ImageUrl);
-                var eventModel = _eventService.GetEventById(model.EventId);
-                
-                if(result.Error == null)
+                if(model.ImageUrl != null)
                 {
-                    await _imageService.DeleteImageAsync(eventModel.PublicId);
+                    var result = await _imageService.AddImageAsync(model.ImageUrl);
+                    var eventModel = _eventService.GetEventById(model.EventId);
+
+                    if (result.Error == null)
+                    {
+                        await _imageService.DeleteImageAsync(eventModel.PublicId);
+
+                        eventModel.EventName = model.EventName;
+                        eventModel.ShortDescription = model.ShortDescription;
+                        eventModel.LongDescription = model.LongDescription;
+                        eventModel.StartDate = model.StartDate;
+                        eventModel.EndDate = model.EndDate;
+                        eventModel.StartTime = model.StartTime;
+                        eventModel.EndTime = model.EndTime;
+                        eventModel.Address = model.Address;
+                        eventModel.City = model.City;
+                        eventModel.State = model.State;
+                        eventModel.ZipCode = model.ZipCode;
+                        eventModel.Email = model.Email;
+                        eventModel.PhoneNumber = model.PhoneNumber;
+                        eventModel.PublicId = result.PublicId;
+                        eventModel.ImageUrl = result.Url.ToString();
+
+                        _eventService.EditEvent(eventModel);
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Error"] = result.Error.Message.ToString();
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    var eventModel = _eventService.GetEventById(model.EventId);
 
                     eventModel.EventName = model.EventName;
                     eventModel.ShortDescription = model.ShortDescription;
@@ -186,18 +218,13 @@ namespace CMSWebsite.Areas.Admin.Controllers
                     eventModel.ZipCode = model.ZipCode;
                     eventModel.Email = model.Email;
                     eventModel.PhoneNumber = model.PhoneNumber;
-                    eventModel.PublicId = result.PublicId;
-                    eventModel.ImageUrl = result.Url.ToString();
 
                     _eventService.EditEvent(eventModel);
 
                     return RedirectToAction("Index");
+
                 }
-                else
-                {
-                    TempData["Error"] = result.Error.Message.ToString();
-                    return View(model);
-                }             
+                   
             }
             else
             {

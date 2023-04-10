@@ -83,7 +83,6 @@ namespace CMSWebsite.Areas.Admin.ViewModels
 
         public string PublicId { get; set; }
 
-        [Required(ErrorMessage = "Image is required")]
         [DisplayName("Upload Photo")]
         public IFormFile ImageUrl { get; set; }
 

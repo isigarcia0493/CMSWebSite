@@ -121,29 +121,45 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _imageService.AddImageAsync(cViewModel.ImageUrl);
-                var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
-
-                if(result.Error == null)
+                if(cViewModel.ImageUrl != null)
                 {
-                    await _imageService.DeleteImageAsync(carousel.PublicId);
+                    var result = await _imageService.AddImageAsync(cViewModel.ImageUrl);
+                    var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
+
+                    if (result.Error == null)
+                    {
+                        await _imageService.DeleteImageAsync(carousel.PublicId);
+
+                        carousel.ImageName = cViewModel.ImageName;
+                        carousel.ShortDescription = cViewModel.ShortDescription;
+                        carousel.LongDescription = cViewModel.LongDescription;
+                        carousel.ExpirationDate = cViewModel.ExpirationDate;
+                        carousel.PublicId = result.PublicId.ToString();
+                        carousel.ImageUrl = result.Url.ToString();
+
+                        _carouselService.EditCarousel(carousel);
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Error"] = result.Error.Message.ToString();
+                        return View(cViewModel);
+                    }
+                }
+                else
+                {
+                    var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
 
                     carousel.ImageName = cViewModel.ImageName;
                     carousel.ShortDescription = cViewModel.ShortDescription;
                     carousel.LongDescription = cViewModel.LongDescription;
                     carousel.ExpirationDate = cViewModel.ExpirationDate;
-                    carousel.PublicId = result.PublicId.ToString();
-                    carousel.ImageUrl = result.Url.ToString();
 
                     _carouselService.EditCarousel(carousel);
 
                     return RedirectToAction("Index");
-                }
-                else
-                {
-                    TempData["Error"] = result.Error.Message.ToString();
-                    return View(cViewModel);
-                }
+                }                
             }
             else
             {

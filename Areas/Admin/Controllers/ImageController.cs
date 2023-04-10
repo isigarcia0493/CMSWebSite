@@ -156,33 +156,53 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _imageService.AddImageAsync(iViewModel.ImageUrl);
-
-                var image = _imageService.GetImageById(iViewModel.ImageId);
-                
-                if(result != null)
+                if(iViewModel.ImageUrl != null)
                 {
-                    await _imageService.DeleteImageAsync(image.PublicId);
+                    var result = await _imageService.AddImageAsync(iViewModel.ImageUrl);
+
+                    var image = _imageService.GetImageById(iViewModel.ImageId);
+
+                    if (result != null)
+                    {
+                        await _imageService.DeleteImageAsync(image.PublicId);
+                        image.ImageId = iViewModel.ImageId;
+                        image.Name = iViewModel.Name;
+                        image.ShortDescription = iViewModel.ShortDescription;
+                        image.LongDescription = iViewModel.LongDescription;
+                        image.UploadDate = image.UploadDate;
+                        image.UpdatedDate = DateTime.Now;
+                        image.ImageUrl = result.Url.ToString();
+                        image.PublicId = result.PublicId.ToString();
+                        image.AlbumId = iViewModel.AlbumId;
+
+                        _imageService.EditImage(image);
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Albums = GetAlbums();
+                        TempData["Error"] = result.Error.Message.ToString();
+                        return View(iViewModel);
+                    }
+                }
+                else
+                {
+                    var image = _imageService.GetImageById(iViewModel.ImageId);
+
                     image.ImageId = iViewModel.ImageId;
                     image.Name = iViewModel.Name;
                     image.ShortDescription = iViewModel.ShortDescription;
                     image.LongDescription = iViewModel.LongDescription;
                     image.UploadDate = image.UploadDate;
                     image.UpdatedDate = DateTime.Now;
-                    image.ImageUrl = result.Url.ToString();
-                    image.PublicId = result.PublicId.ToString();
                     image.AlbumId = iViewModel.AlbumId;
 
                     _imageService.EditImage(image);
 
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    ViewBag.Albums = GetAlbums();
-                    TempData["Error"] = result.Error.Message.ToString();
-                    return View(iViewModel);
-                }
+                
             }
             else
             {
