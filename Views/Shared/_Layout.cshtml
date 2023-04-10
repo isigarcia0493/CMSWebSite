@@ -51,9 +51,6 @@
                         <li class="nav-item @Html.IsActive("Album", "Index") mr-3">
                             @Html.ActionLink("Albums", "Index", "Album", "", new { @class="nav-link text-dark" })
                         </li>
-                        <li class="nav-item @Html.IsActive("Image", "Index") mr-3">
-                            @Html.ActionLink("Photos", "Index", "Image", "", new { @class="nav-link text-dark" })
-                        </li>
                         <li class="nav-item @Html.IsActive("Event", "Index") mr-3">
                             @Html.ActionLink("Events", "Index", "Event", "", new { @class="nav-link text-dark" })
                         </li>
@@ -74,7 +71,7 @@
     <main class="mb-5 pb-5">
         @RenderBody()
     </main>
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted sticky-footer">
         <div class="container-fluid">
             &copy; 2023 - JeanneBaerPhotographs
         </div>

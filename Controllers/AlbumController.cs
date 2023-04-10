@@ -64,5 +64,13 @@ namespace CMSWebsite.Controllers
 
             return View(images);
         }
+
+        [HttpGet]
+        public IActionResult OpenPhoto(int id)
+        {
+            var photo = _imageService.GetImageById(id);
+
+            return View(photo);
+        }
     }
 }

@@ -160,7 +160,7 @@ namespace CMSWebsite.Areas.Admin.Controllers
 
                 var image = _imageService.GetImageById(iViewModel.ImageId);
                 
-                if(result == null)
+                if(result != null)
                 {
                     await _imageService.DeleteImageAsync(image.PublicId);
                     image.ImageId = iViewModel.ImageId;

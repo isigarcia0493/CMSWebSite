@@ -1,0 +1,17 @@
+﻿@model Image
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container-fluid pl-5">
+    <div class="header">
+        <h1>@Model.Name</h1>
+    </div>
+    <div class="openedPhoto pt-5 pb-5">
+        <img src="@Model.ImageUrl" asp-append-version="true" alt="@Model.ShortDescription">
+    </div>
+    <div class="description">
+        @Model.LongDescription
+    </div>
+</div>

@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Image>
 
+@{ 
+    ViewData["Title"] = "Photos";
+}
+
 <div class="container-fluid pl-5">
     <div class="header">
         <h1>Photos in @ViewBag.Album</h1>
@@ -7,7 +11,20 @@
     <div class="row pt-3">
         @foreach (var image in Model)
         {
-            <img src="@image.ImageUrl" asp-append-version="true" alt="@image.ShortDescription" height="250" width="200">            
+             <div class="cardContent">
+                <div class="card" style="width: 18rem;">
+                    <a class="text-decoration-none" href="@Url.ActionLink("OpenPhoto", "Album", new { id = image.ImageId})">
+                        <div class="img-thumbnail p-3">
+                            <img src="@image.ImageUrl" asp-append-version="true" class="card-img-top" alt="@image.ShortDescription" height="250">
+                        </div>
+                        <div class="card-body p-2" style="text-align: center">
+                            <h4 class="card-title fw-bold">@image.Name</h4>
+                            <p>@image.ShortDescription</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
         }
     </div>
 </div>
+
