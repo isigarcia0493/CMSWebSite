@@ -1,0 +1,79 @@
+﻿@model Registration
+
+@{
+    ViewData["Title"] = "Registration Details";
+}
+
+<div>
+    <div class="header">
+        <h1>Details for Registration</h1>
+    </div>
+    <div class="detailsView">
+        <div class="details">
+            <dl class="row mb-5">
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>                
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.RegistrationDate)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.RegistrationDate)
+                </dd>                
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.PeopleAttending)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.PeopleAttending)
+                </dd>                
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Accomodations)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.Accomodations)
+                </dd>                
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.DescribeAccomodations)
+                </dt>
+                <dd class="col-sm-6">
+                    @Html.DisplayFor(model => model.DescribeAccomodations)
+                </dd>                
+                <dt class="col-sm-6">
+                    @Html.DisplayNameFor(model => model.Events)
+                </dt>
+                <dd class="col-sm-6">
+                    @foreach (var item in Model.Events)
+                    {
+                        @item.EventName
+                    }
+                </dd>
+            </dl>
+            <div class="justify-content-center">
+                <div>
+                    @Html.ActionLink("Back to Registration", "Index", "Registration", "", new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

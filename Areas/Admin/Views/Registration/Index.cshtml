@@ -40,7 +40,7 @@
                     <td>@eventModel.EventName</td>
                 }
                 <td style="text-align: center;">
-                    @Html.ActionLink("Details", "RegistrationDetails", "Registration", new{ id = registration.RegistrationId }, new { @class="btn btn-primary" }) |
+                    @Html.ActionLink("Details", "Details", "Registration", new{ id = registration.RegistrationId }, new { @class="btn btn-primary" }) |
                     @Html.ActionLink("Delete", "DeleteRegistration", "Registration", new{ id = registration.RegistrationId }, new { @class="btn btn-danger" })
                 </td>
             </tr>

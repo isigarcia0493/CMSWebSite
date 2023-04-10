@@ -166,10 +166,11 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(model.ImageUrl != null)
+                var eventModel = _eventService.GetEventById(model.EventId);
+
+                if (model.ImageUrl != null)
                 {
                     var result = await _imageService.AddImageAsync(model.ImageUrl);
-                    var eventModel = _eventService.GetEventById(model.EventId);
 
                     if (result.Error == null)
                     {
@@ -203,8 +204,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var eventModel = _eventService.GetEventById(model.EventId);
-
                     eventModel.EventName = model.EventName;
                     eventModel.ShortDescription = model.ShortDescription;
                     eventModel.LongDescription = model.LongDescription;

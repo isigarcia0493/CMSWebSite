@@ -156,11 +156,11 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(iViewModel.ImageUrl != null)
+                var image = _imageService.GetImageById(iViewModel.ImageId);
+
+                if (iViewModel.ImageUrl != null)
                 {
                     var result = await _imageService.AddImageAsync(iViewModel.ImageUrl);
-
-                    var image = _imageService.GetImageById(iViewModel.ImageId);
 
                     if (result != null)
                     {
@@ -188,8 +188,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var image = _imageService.GetImageById(iViewModel.ImageId);
-
                     image.ImageId = iViewModel.ImageId;
                     image.Name = iViewModel.Name;
                     image.ShortDescription = iViewModel.ShortDescription;

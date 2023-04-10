@@ -149,11 +149,11 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(albumVM.AlbumImageUrl != null)
+                var album = _albumService.GetAlbumById(albumVM.AlbumId);
+
+                if (albumVM.AlbumImageUrl != null)
                 {
                     var result = await _imageService.AddImageAsync(albumVM.AlbumImageUrl);
-
-                    var album = _albumService.GetAlbumById(albumVM.AlbumId);
 
                     if (result.Error == null)
                     {
@@ -181,7 +181,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var album = _albumService.GetAlbumById(albumVM.AlbumId);
                     album = _albumService.GetAlbumById(albumVM.AlbumId);
 
                     album.AlbumId = albumVM.AlbumId;

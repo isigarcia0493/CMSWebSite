@@ -121,10 +121,11 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(cViewModel.ImageUrl != null)
+                var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
+
+                if (cViewModel.ImageUrl != null)
                 {
                     var result = await _imageService.AddImageAsync(cViewModel.ImageUrl);
-                    var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
 
                     if (result.Error == null)
                     {
@@ -149,8 +150,6 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var carousel = _carouselService.GetCarouselById(cViewModel.CarouselId);
-
                     carousel.ImageName = cViewModel.ImageName;
                     carousel.ShortDescription = cViewModel.ShortDescription;
                     carousel.LongDescription = cViewModel.LongDescription;

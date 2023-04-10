@@ -50,5 +50,19 @@ namespace CMSWebsite.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Event");
             }
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var eventRegistrations = _eventRegistrationService.GetAllEventRegistration().Where(er => er.RegistrationId == id);
+
+            foreach (var item in eventRegistrations)
+            {
+                item.Registration = _registrationService.GetRegistrationById(item.RegistrationId);
+                item.Registration.Events = _eventService.GetAllEvents().Where(e => e.EventId == item.EventId).ToList();
+            }
+
+            return View(eventRegistrations);
+        }
     }
 }

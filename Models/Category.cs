@@ -7,7 +7,6 @@ namespace CMSWebsite.Models
 {
     public class Category
     {
-
         public Category() 
         {
             List<Category> categories = new List<Category>();
