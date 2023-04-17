@@ -23,7 +23,7 @@ namespace CMSWebsite.Areas.Admin.ViewModels
         public string ShortDescription { get; set; }
 
         [Required(ErrorMessage = "Long description is required")]
-        [DisplayName("Name")]
+        [DisplayName("Long Description")]
         [MaxLength(500)]
         public string LongDescription { get; set; }
 
