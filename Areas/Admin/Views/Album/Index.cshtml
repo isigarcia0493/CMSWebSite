@@ -24,7 +24,7 @@
             <tr>
                 <td>@album.Name</td>
                 <td>@album.Category.CategoryName</td>
-                <td><img src="@album.AlbumImageUrl" alt="@album.ShortDescription" width="50" height="50" /></td>
+                <td style="text-align: center;"><img src="~/Images/Albums/@album.AlbumImageUrl" alt="@album.ShortDescription" width="50" height="50" /></td>
                 <td style="text-align: center;">
                     @Html.ActionLink("Details", "AlbumDetails", "Album", new{ id = album.AlbumId }, new { @class="btn btn-primary" }) |
                     @Html.ActionLink("Delete", "DeleteAlbum", "Album", new{ id = album.AlbumId }, new { @class="btn btn-danger" })

@@ -3,11 +3,14 @@ using CMSWebsite.Models;
 using CMSWebsite.ServiceInterfaces;
 using CMSWebsite.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,12 +24,14 @@ namespace CMSWebsite.Areas.Admin.Controllers
         private readonly IAlbumService _albumService;
         private readonly ICategoryService _categoryService;
         private readonly IImageService _imageService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public AlbumController(IAlbumService albumService, ICategoryService categoryService, IImageService imageService)
+        public AlbumController(IAlbumService albumService, ICategoryService categoryService, IImageService imageService, IWebHostEnvironment hostEnvironment)
         {
             _albumService = albumService;
             _categoryService = categoryService;
             _imageService = imageService;
+            _hostEnvironment = hostEnvironment;
         }
 
         [HttpGet]
@@ -56,32 +61,27 @@ namespace CMSWebsite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _imageService.AddImageAsync(albumVM.AlbumImageUrl);
+                Album album = new Album();
 
-                if(result.Error == null)
+                string rootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(albumVM.AlbumImageUrl.FileName);
+                string extension = Path.GetExtension(albumVM.AlbumImageUrl.FileName);
+                album.AlbumImageUrl = fileName = fileName + extension;
+                string path = Path.Combine(rootPath + "/Images/Albums/", fileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    var album = new Album()
-                    {
-                        Name = albumVM.Name,
-                        ShortDescription = albumVM.ShortDescription,
-                        LongDescription = albumVM.LongDescription,
-                        PublicId = result.PublicId.ToString(),
-                        AlbumImageUrl = result.Url.ToString(),
-                        CategoryId = albumVM.CategoryId,
-                    };
-
-                    _albumService.AddAlbum(album);
-
-                    return RedirectToAction("Index");
+                    await albumVM.AlbumImageUrl.CopyToAsync(fileStream);
                 }
-                else
-                {
-                    ViewBag.Categories = GetCategories();
-                    TempData["Error"] = result.Error.Message.ToString();
 
-                    return View(albumVM);
-                }
-                
+                album.Name = albumVM.Name;
+                album.ShortDescription = albumVM.ShortDescription;
+                album.LongDescription = albumVM.LongDescription;
+                album.CategoryId = albumVM.CategoryId;
+
+                _albumService.AddAlbum(album);
+
+                return RedirectToAction("Index");               
             }
             else
             {
@@ -222,10 +222,14 @@ namespace CMSWebsite.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult DeleteAlbum(Album model)
         {
-
             var album = _albumService.GetAlbumById(model.AlbumId);
+            var imgaePath = Path.Combine(_hostEnvironment.WebRootPath + "/Images/Albums/", album.AlbumImageUrl);
 
-            _imageService.DeleteImageAsync(album.PublicId);
+            if(System.IO.File.Exists(imgaePath))
+            {
+                System.IO.File.Delete(imgaePath);
+            }
+
             _albumService.DeleteAlbum(model.AlbumId);
 
             return RedirectToAction("Index");
